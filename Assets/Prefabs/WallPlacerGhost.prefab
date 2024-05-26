@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4634878154387134994}
   - component: {fileID: 1474963301211582460}
+  - component: {fileID: 3658534914351810976}
   m_Layer: 0
   m_Name: WallPlacerGhost
   m_TagString: Untagged
@@ -71,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1421823919
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: abde5758463fabc4baa320c6cef49d1a, type: 3}
   m_Color: {r: 0, g: 1, b: 0.10208559, a: 1}
@@ -84,3 +85,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3658534914351810976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4533823014358160350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6b8dd8d8848544794f3317ca2c0890, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  structurePrefab: {fileID: 6041740710060645762, guid: 34e42fd7edfc35d4f866848fa46ada7e, type: 3}

@@ -9,6 +9,23 @@ public class SpawnController : MonoBehaviour
     [SerializeField]
     private GameObject goblinPrefab;
 
+    public static SpawnController Instance;
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            // If an instance already exists and it's not this one, destroy this instance
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            // Set this instance as the singleton instance if it's the first one
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject); // Optional: Don't destroy this object when loading new scenes
+        }
+    }
+
     private void Start()
     {
         GetSpawns();
