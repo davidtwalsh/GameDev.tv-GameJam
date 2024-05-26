@@ -20,12 +20,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private Animator weaponAnimator;
 
-    [SerializeField]
-    private SpriteRenderer spriteRenderer;
-
     void Update()
     {
-        spriteRenderer.sortingOrder = (int)(transform.position.y*-100);
         float dstToTarget;
         //Switch State
         switch (state)

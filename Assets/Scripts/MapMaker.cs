@@ -102,6 +102,15 @@ public class MapMaker : MonoBehaviour
         }
         return map[x, y]; 
     }
+
+    public int getXSize()
+    {
+        return xSize;
+    }
+    public int getYSize()
+    {
+        return ySize;
+    }
 }
 
 
