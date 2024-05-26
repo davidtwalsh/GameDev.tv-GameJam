@@ -14,6 +14,9 @@ public class Wall : MonoBehaviour
     [SerializeField]
     private SpriteRenderer spriteRenderer;
 
+    [SerializeField]
+    private float hp = 100;
+
     public void SetPosition(int x, int y)
     {
         xPosition = x;
@@ -47,5 +50,22 @@ public class Wall : MonoBehaviour
             Wall belowWall = MapMaker.Instance.walls[(xPosition, yPosition - 1)];
             belowWall.SetSprite();
         }
+    }
+
+    public void Attacked(float damage)
+    {
+        hp -= damage;
+        if (hp < 0)
+        {
+            DestroyWall();
+        }
+    }
+
+    private void DestroyWall()
+    {
+        MapMaker.Instance.walls.Remove((xPosition, yPosition));
+        MapMaker.Instance.SetTileTypeForCell(xPosition, yPosition,TileType.Grass);
+        UpdateOtherSprites();
+        Destroy(gameObject);
     }
 }

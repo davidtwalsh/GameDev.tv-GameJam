@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEditor;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private EnemyState state = EnemyState.Waiting;
+    private EnemyState state = EnemyState.FindingTarget;
     private GameObject target = null;
 
     [SerializeField]
@@ -16,12 +17,20 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float attackDistance = 2f;
 
+    [SerializeField]
+    private Animator weaponAnimator;
+
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
     void Update()
     {
+        spriteRenderer.sortingOrder = (int)(transform.position.y*-100);
+        float dstToTarget;
         //Switch State
         switch (state)
         {
-            case EnemyState.Waiting:
+            case EnemyState.FindingTarget:
                 bool foundTarget = FindClosestTarget();
                 if (foundTarget)
                 {
@@ -32,16 +41,38 @@ public class Enemy : MonoBehaviour
                 //move in fixed update
                 if (target != null)
                 {
-                    float dstToTarget = CalculateDistance(transform.position.x, transform.position.y, target.transform.position.x, target.transform.position.y);
+                    dstToTarget = CalculateDistance(transform.position.x, transform.position.y, target.transform.position.x, target.transform.position.y);
                     if (dstToTarget < attackDistance)
                     {
+                        rb.velocity = Vector3.zero;
                         state = EnemyState.Attacking;
+                        break;
                     }
+                }
+                else //lost target so get a new one
+                {
+                    state = EnemyState.FindingTarget;
                 }
 
                 break;
             case EnemyState.Attacking:
-
+                if (target == null)
+                {
+                    weaponAnimator.SetBool("isAttacking", false);
+                    state = EnemyState.FindingTarget;
+                    break;
+                }
+                if (weaponAnimator != null)
+                {
+                    weaponAnimator.SetBool("isAttacking", true);
+                }
+                dstToTarget = CalculateDistance(transform.position.x, transform.position.y, target.transform.position.x, target.transform.position.y);
+                if (dstToTarget > attackDistance + .2f)
+                {
+                    weaponAnimator.SetBool("isAttacking", false);
+                    state = EnemyState.FindingTarget;
+                    break;
+                }
                 break;
         }
     }
@@ -87,6 +118,15 @@ public class Enemy : MonoBehaviour
                 Vector2 targetPos = new Vector2(targetPoint.position.x, targetPoint.position.y);
                 Vector2 direction = (targetPos - rb.position).normalized;
 
+                if (direction.x > 0)
+                {
+                    transform.localScale = new Vector3(1f,transform.localScale.y,transform.localScale.z);
+                }
+                else if (direction.x < 0)
+                {
+                    transform.localScale = new Vector3(-1f, transform.localScale.y, transform.localScale.z);
+                }
+
                 // Move towards the target point
                 rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
             }
@@ -103,11 +143,16 @@ public class Enemy : MonoBehaviour
         // Return the square root of the squared distance
         return Mathf.Sqrt(squaredDistance);
     }
+
+    public GameObject getTarget()
+    {
+        return target;
+    }
 }
 
 public enum EnemyState
 {
-    Waiting,
+    FindingTarget,
     MovingToTarget,
     Attacking
 }

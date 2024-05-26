@@ -25,7 +25,6 @@ public class ObjectPlacer : MonoBehaviour
         {
             placingObject = true;
             wallPlacerGhost.SetActive(true);
-            Debug.Log("here");
         }
         if (placingObject == true)
         {
