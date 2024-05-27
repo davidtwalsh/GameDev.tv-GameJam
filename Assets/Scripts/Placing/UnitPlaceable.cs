@@ -40,6 +40,7 @@ public class UnitPlaceable : MonoBehaviour, Placeable
     public void Place(Vector3 worldPosition)
     {
         GameObject newObj = Instantiate(unitPrefab, transform.position, Quaternion.identity);
+        ObjectPlacer.Instance.GetPlayerAttackables().Add(newObj);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

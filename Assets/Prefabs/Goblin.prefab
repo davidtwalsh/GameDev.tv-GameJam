@@ -316,3 +316,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 40
   weaponUser: {fileID: 1745014247546067710}
+  damageAttack:
+    damage: 15

@@ -8,19 +8,21 @@ public class Weapon : MonoBehaviour
     private float damage;
     [SerializeField]
     private Enemy weaponUser;
+    [SerializeField]
+    private DamageAttack damageAttack;
+
 
     public void AttackEvent()
     {
         GameObject attackTarget = weaponUser.getTarget();
         if (attackTarget != null)
         {
-            Wall wall = attackTarget.GetComponent<Wall>();
-            if (wall != null)
+            EntityStatus status = attackTarget.GetComponent<EntityStatus>();
+            if (status != null)
             {
-                wall.Attacked(damage);
+                damageAttack.AffectTarget(status);
             }
         }
 
     }
-
 }

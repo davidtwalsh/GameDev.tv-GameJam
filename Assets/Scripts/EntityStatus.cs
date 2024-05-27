@@ -36,6 +36,7 @@ public class EntityStatus : MonoBehaviour
             {
                 SpawnController.Instance.GetMonsters().Remove(gameObject);
             }
+            ObjectPlacer.Instance.GetPlayerAttackables().Remove(gameObject);
             Destroy(gameObject);
         }
     }

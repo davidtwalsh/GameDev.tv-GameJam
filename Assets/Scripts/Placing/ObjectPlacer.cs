@@ -23,6 +23,25 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField]
     private Color nonPlacableColor;
 
+    public static ObjectPlacer Instance;
+
+    private List<GameObject> playerAttackables = new List<GameObject>();
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            // If an instance already exists and it's not this one, destroy this instance
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            // Set this instance as the singleton instance if it's the first one
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject); // Optional: Don't destroy this object when loading new scenes
+        }
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -86,6 +105,11 @@ public class ObjectPlacer : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public List<GameObject> GetPlayerAttackables()
+    {
+        return playerAttackables;
     }
 
 

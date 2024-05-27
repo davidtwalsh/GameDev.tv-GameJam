@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1948742359221755966}
   - component: {fileID: -7633641291412502727}
   - component: {fileID: 1859255969457751482}
+  - component: {fileID: 8416981664418172853}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -196,6 +197,21 @@ MonoBehaviour:
   attackTime: 2
   attack:
     damage: 5
+--- !u!114 &8416981664418172853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287521817529525528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4d6b0d2a7d25f44bb788308a6135a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 20
+  normalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
+  damageSpriteColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &8034921954339737531
 GameObject:
   m_ObjectHideFlags: 0

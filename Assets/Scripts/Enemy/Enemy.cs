@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Enemy : MonoBehaviour
 {
@@ -75,32 +76,33 @@ public class Enemy : MonoBehaviour
 
     private bool FindClosestTarget()
     {
-        Wall closestWall = null;
+        GameObject closestPlayerAttackable = null;
         float curClosestDst = 999999f;
-        foreach ((int,int) item in MapMaker.Instance.walls.Keys)
+        foreach (GameObject attackable in ObjectPlacer.Instance.GetPlayerAttackables())
         {
-            float wallX = item.Item1;
-            float wallY = item.Item2;
+            float xx = attackable.transform.position.x;
+            float yy = attackable.transform.position.y;
 
             float myX = transform.position.x;
             float myY = transform.position.y;
 
-            float dstToWall = CalculateDistance(wallX, wallY, myX, myY);
-            if (dstToWall < curClosestDst)
+            float dstToAttackable = CalculateDistance(xx, yy, myX, myY);
+            if (dstToAttackable < curClosestDst)
             {
-                curClosestDst = dstToWall;
-                closestWall = MapMaker.Instance.walls[item];
+                curClosestDst = dstToAttackable;
+                closestPlayerAttackable = attackable;
             }
         }
-        if (closestWall != null)
+        if (closestPlayerAttackable != null)
         {
-            target = closestWall.gameObject;
+            target = closestPlayerAttackable;
             return true;
         }
         else
         {
             return false;
         }
+
     }
 
     void FixedUpdate()

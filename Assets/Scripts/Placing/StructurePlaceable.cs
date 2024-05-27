@@ -50,7 +50,9 @@ public class StructurePlaceable : MonoBehaviour, Placeable
         int xMapPosition = (int)worldPosition.x;
         int yMapPosition = (int)worldPosition.y;
         GameObject newObj = Instantiate(structurePrefab, transform.position, Quaternion.identity);
-        //newObj.transform.parent = transform;
+        
+        ObjectPlacer.Instance.GetPlayerAttackables().Add(newObj);
+
         MapMaker.Instance.SetTileTypeForCell(xMapPosition, yMapPosition, TileType.Wall);
         Wall wall = newObj.GetComponent<Wall>();
         if (wall != null)
