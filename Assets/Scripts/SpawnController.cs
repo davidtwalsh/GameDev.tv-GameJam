@@ -11,6 +11,8 @@ public class SpawnController : MonoBehaviour
 
     public static SpawnController Instance;
 
+    private List<GameObject> monsters = new List<GameObject>();
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -48,6 +50,7 @@ public class SpawnController : MonoBehaviour
         // Generate a random index within the bounds of the list
         int randomIndex = Random.Range(0, spawns.Count);
         GameObject monster = Instantiate(goblinPrefab, spawns[randomIndex], Quaternion.identity);
+        monsters.Add(monster);
         
     }
     private void GetSpawns()
@@ -65,5 +68,10 @@ public class SpawnController : MonoBehaviour
             spawns.Add(new Vector3(0, i, 0));
             spawns.Add(new Vector3(x-1, i, 0));
         }
+    }
+
+    public List<GameObject> GetMonsters()
+    {
+        return monsters;
     }
 }
