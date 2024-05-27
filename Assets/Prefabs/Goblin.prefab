@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1790db7abe012cc4f946041f12b6e49e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 0.7
   rb: {fileID: 6618550763101521333}
   attackDistance: 1
   weaponAnimator: {fileID: 4450340481558977064}
@@ -196,6 +196,9 @@ MonoBehaviour:
   normalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
   damageSpriteColor: {r: 1, g: 0, b: 0, a: 1}
   remainsPrefab: {fileID: 4609308030219828146, guid: ed2276fe485cc5844b8049acdf3aab89, type: 3}
+  onAttackEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3429430868076806750
 GameObject:
   m_ObjectHideFlags: 0

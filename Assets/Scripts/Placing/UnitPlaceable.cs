@@ -11,6 +11,9 @@ public class UnitPlaceable : MonoBehaviour, Placeable
 
     List<GameObject> colliders = new List<GameObject>();
 
+    [SerializeField]
+    private int cost;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -67,5 +70,8 @@ public class UnitPlaceable : MonoBehaviour, Placeable
             colliders.Remove(collision.gameObject);
         }
     }
-
+    public int GetCost()
+    {
+        return cost;
+    }
 }

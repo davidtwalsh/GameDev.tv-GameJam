@@ -9,4 +9,6 @@ public interface Placeable
     bool IsPlaceable(Vector3 worldPosition);
 
     void MoveWithMouse(Vector3 worldPosition);
+
+    int GetCost();
 }

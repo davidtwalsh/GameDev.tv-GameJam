@@ -33,8 +33,13 @@ public class ResourceController : MonoBehaviour
         coinAmountText.text = numCoins.ToString();
     }
 
-    public int getNumCoins()
+    public int GetNumCoins()
     {
         return numCoins;
+    }
+
+    public void SpendCoins(int spent)
+    {
+        numCoins -= spent;
     }
 }

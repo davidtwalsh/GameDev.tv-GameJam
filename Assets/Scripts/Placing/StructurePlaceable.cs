@@ -11,6 +11,9 @@ public class StructurePlaceable : MonoBehaviour, Placeable
 
     private Rigidbody2D rb;
 
+    [SerializeField]
+    private int cost;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -96,5 +99,10 @@ public class StructurePlaceable : MonoBehaviour, Placeable
         {
             colliders.Remove(collision.gameObject);
         }
+    }
+
+    public int GetCost()
+    {
+        return cost;
     }
 }

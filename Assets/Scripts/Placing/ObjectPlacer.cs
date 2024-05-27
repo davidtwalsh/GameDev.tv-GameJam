@@ -28,6 +28,8 @@ public class ObjectPlacer : MonoBehaviour
 
     private List<GameObject> playerAttackables = new List<GameObject>();
 
+    private bool canAfford = true;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -64,12 +66,21 @@ public class ObjectPlacer : MonoBehaviour
 
             activePlaceable.MoveWithMouse(worldPosition);
 
+            if (ResourceController.Instance.GetNumCoins() - activePlaceable.GetCost() < 0)
+            {
+                canAfford = false;
+            }
+            else
+            {
+                canAfford = true;
+            }
+
             canPlaceObject = activePlaceable.IsPlaceable(worldPosition);
-            if (canPlaceObject == true)
+            if (canPlaceObject == true && canAfford == true)
             {
                 activePlaceGhostSpriteRenderer.color = placableColor;
             }
-            else if (placingObject == false) 
+            else if (placingObject == false || canAfford == false) 
             {
                 activePlaceGhostSpriteRenderer.color = nonPlacableColor;
             }
@@ -84,9 +95,10 @@ public class ObjectPlacer : MonoBehaviour
                 activePlacerGhost.SetActive(true);
             }
 
-            if (Input.GetMouseButtonDown(0) && canPlaceObject == true)
+            if (Input.GetMouseButtonDown(0) && canPlaceObject == true && canAfford == true)
             {
                 activePlaceable.Place(worldPosition);
+                ResourceController.Instance.SpendCoins(activePlaceable.GetCost());
             }
         }
     }
