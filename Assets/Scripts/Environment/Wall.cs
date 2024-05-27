@@ -8,12 +8,30 @@ public class Wall : MonoBehaviour
     private int yPosition;
 
     [SerializeField]
-    private Sprite hasBelowSprite;
-    [SerializeField]
-    private Sprite noBelowSprite;
-    [SerializeField]
     private SpriteRenderer spriteRenderer;
 
+    private EntityStatus status;
+
+    private WallType wallType;
+
+    [SerializeField]
+    private Sprite woodenWallTopSprite;
+    [SerializeField]
+    private Sprite woodenWallFrontSprite;
+    [SerializeField]
+    private Sprite woodenWallFrontMinorDamageSprite;
+    [SerializeField]
+    private Sprite woodenWallFrontMajorDamageSprite;
+    [SerializeField]
+    private Sprite woodenWallTopMinorDamageSprite;
+    [SerializeField]
+    private Sprite woodenWallTopMajorDamageSprite;
+
+
+    private void Start()
+    {
+        status = GetComponent<EntityStatus>();
+    }
     public void SetPosition(int x, int y)
     {
         xPosition = x;
@@ -25,11 +43,13 @@ public class Wall : MonoBehaviour
         TileType tileBelow = MapMaker.Instance.GetTileTypeForCell(xPosition, yPosition-1);
         if (tileBelow == TileType.Wall)
         {
-            spriteRenderer.sprite = hasBelowSprite;
+            wallType = WallType.OnlyTop;
+            CheckIfNeedToUpdateWallSprite();
         }
         else
         {
-            spriteRenderer.sprite = noBelowSprite;
+            wallType= WallType.FrontAndTop;
+            CheckIfNeedToUpdateWallSprite();
         }
     }
 
@@ -57,4 +77,62 @@ public class Wall : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void CheckIfNeedToUpdateWallSprite()
+    {
+        if (status == null)
+        {
+            if (wallType == WallType.FrontAndTop)
+            {
+                spriteRenderer.sprite = woodenWallFrontSprite;
+            }
+            else if (wallType == WallType.OnlyTop)
+            {
+                spriteRenderer.sprite = woodenWallTopSprite;
+            }
+        }
+        else
+        {
+            float maxHP = status.GetMaxHP();
+            float curHP = status.GetCurrentHP();
+
+            if (curHP / maxHP <= .33f)
+            {
+                if (wallType == WallType.FrontAndTop)
+                {
+                    spriteRenderer.sprite = woodenWallFrontMajorDamageSprite;
+                }
+                else if (wallType == WallType.OnlyTop)
+                {
+                    spriteRenderer.sprite = woodenWallTopMajorDamageSprite;
+                }
+            }
+            else if (curHP / maxHP <= .66f)
+            {
+                if (wallType == WallType.FrontAndTop)
+                {
+                    spriteRenderer.sprite = woodenWallFrontMinorDamageSprite;
+                }
+                else if (wallType == WallType.OnlyTop)
+                {
+                    spriteRenderer.sprite = woodenWallTopMinorDamageSprite;
+                }
+            }
+            else
+            {
+                if (wallType == WallType.FrontAndTop)
+                {
+                    spriteRenderer.sprite = woodenWallFrontSprite;
+                }
+                else if (wallType == WallType.OnlyTop)
+                {
+                    spriteRenderer.sprite = woodenWallTopSprite;
+                }
+            }
+        }
+    }
+    private enum WallType
+    {
+        OnlyTop,
+        FrontAndTop
+    }
 }

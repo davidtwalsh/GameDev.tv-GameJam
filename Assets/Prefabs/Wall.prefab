@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6115024176072622438}
   - component: {fileID: -1895946632221695529}
   m_Layer: 0
-  m_Name: WoodWall
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,9 +100,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82dc1435871ed74b925ff8ef118834c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasBelowSprite: {fileID: 21300000, guid: afefb22d1c7950c478600c3282c728ad, type: 3}
-  noBelowSprite: {fileID: 21300000, guid: abde5758463fabc4baa320c6cef49d1a, type: 3}
   spriteRenderer: {fileID: 3531246747313572826}
+  woodenWallTopSprite: {fileID: 21300000, guid: afefb22d1c7950c478600c3282c728ad, type: 3}
+  woodenWallFrontSprite: {fileID: 21300000, guid: abde5758463fabc4baa320c6cef49d1a, type: 3}
+  woodenWallFrontMinorDamageSprite: {fileID: 21300000, guid: 0588c73e716aa8c4f87ddb300edae9b2, type: 3}
+  woodenWallFrontMajorDamageSprite: {fileID: 21300000, guid: f6ba3e74e8d7e3d42b906756dbcda9fa, type: 3}
+  woodenWallTopMinorDamageSprite: {fileID: 21300000, guid: 132409574f550ec4b9d0ed943b284a06, type: 3}
+  woodenWallTopMajorDamageSprite: {fileID: 21300000, guid: 494189df83566a84094fbe7f852d8944, type: 3}
 --- !u!50 &4649056445315465324
 Rigidbody2D:
   serializedVersion: 4
@@ -190,3 +194,19 @@ MonoBehaviour:
   maxHP: 100
   normalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
   damageSpriteColor: {r: 1, g: 0, b: 0, a: 1}
+  remainsPrefab: {fileID: 0}
+  onAttackEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2915515494737064020}
+        m_TargetAssemblyTypeName: Wall, Assembly-CSharp
+        m_MethodName: CheckIfNeedToUpdateWallSprite
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

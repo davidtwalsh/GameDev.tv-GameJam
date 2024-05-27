@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EntityStatus : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class EntityStatus : MonoBehaviour
     [SerializeField]
     private GameObject remainsPrefab;
 
+    [SerializeField]
+    private UnityEvent onAttackEvent;
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -27,6 +31,7 @@ public class EntityStatus : MonoBehaviour
     public void DealDamageToEntity(float damage)
     {
         hp -= damage;
+        onAttackEvent.Invoke();
         CheckHP();
         StartCoroutine(FlashSprite());
     }
@@ -57,5 +62,15 @@ public class EntityStatus : MonoBehaviour
         spriteRenderer.color = damageSpriteColor;
         yield return new WaitForSeconds(.1f);
         spriteRenderer.color = normalSpriteColor;
+    }
+
+    public float GetMaxHP()
+    {
+        return maxHP;
+    }
+
+    public float GetCurrentHP()
+    {
+        return hp;
     }
 }
