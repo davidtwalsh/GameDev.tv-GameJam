@@ -212,6 +212,7 @@ MonoBehaviour:
   maxHP: 20
   normalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
   damageSpriteColor: {r: 1, g: 0, b: 0, a: 1}
+  remainsPrefab: {fileID: 4609308030219828146, guid: ed2276fe485cc5844b8049acdf3aab89, type: 3}
 --- !u!1 &8034921954339737531
 GameObject:
   m_ObjectHideFlags: 0

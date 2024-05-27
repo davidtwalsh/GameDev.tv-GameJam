@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ObjectPlacer : MonoBehaviour
 {
@@ -44,30 +45,12 @@ public class ObjectPlacer : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (activePlacerGhost != null)
-            {
-                activePlacerGhost.SetActive(false);
-            }
-            placingObject = true;
-            activePlacerGhost = wallPlacerGhost;
-            activePlacerGhost.SetActive(true);
-            activePlaceable = activePlacerGhost.GetComponent<Placeable>();
-            activePlaceGhostSpriteRenderer = activePlacerGhost.GetComponent<SpriteRenderer>();
+            CleanUpOldGhost();
+            placingObject = false;
         }
-        else if (Input.GetKeyDown(KeyCode.T))
-        {
-            if (activePlacerGhost != null)
-            {
-                activePlacerGhost.SetActive(false);
-            }
-            placingObject = true;
-            activePlacerGhost = archerPlacerGhost;
-            activePlacerGhost.SetActive(true);
-            activePlaceable = activePlacerGhost.GetComponent<Placeable>();
-            activePlaceGhostSpriteRenderer = activePlacerGhost.GetComponent<SpriteRenderer>();    
-        }
+
         if (placingObject == true)
         {
             // Get the position of the mouse cursor in screen coordinates
@@ -86,9 +69,19 @@ public class ObjectPlacer : MonoBehaviour
             {
                 activePlaceGhostSpriteRenderer.color = placableColor;
             }
-            else
+            else if (placingObject == false) 
             {
                 activePlaceGhostSpriteRenderer.color = nonPlacableColor;
+            }
+
+            if (IsPointerOverUIObject() == true)
+            {
+                canPlaceObject = false;
+                activePlacerGhost.SetActive(false);
+            }
+            else
+            {
+                activePlacerGhost.SetActive(true);
             }
 
             if (Input.GetMouseButtonDown(0) && canPlaceObject == true)
@@ -112,5 +105,54 @@ public class ObjectPlacer : MonoBehaviour
         return playerAttackables;
     }
 
+    private void SetUpNewGhost(GameObject newGhost)
+    {
+        placingObject = true;
+        activePlacerGhost = newGhost;
+        activePlacerGhost.SetActive(true);
+        activePlaceable = activePlacerGhost.GetComponent<Placeable>();
+        activePlaceGhostSpriteRenderer = activePlacerGhost.GetComponent<SpriteRenderer>();
+    }
 
+    private void CleanUpOldGhost()
+    {
+        if (activePlacerGhost != null)
+        {
+            activePlacerGhost.SetActive(false);
+        }
+    }
+
+    public void SetPlacingWall()
+    {
+        CleanUpOldGhost();
+        SetUpNewGhost(wallPlacerGhost);
+    }
+
+    public void SetPlacingArcher()
+    {
+        CleanUpOldGhost();
+        SetUpNewGhost(archerPlacerGhost);
+    }
+
+    bool IsPointerOverUIObject()
+    {
+        // Check if EventSystem exists
+        if (EventSystem.current == null)
+            return false;
+
+        // Create PointerEventData to pass to the event system
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+
+        // Set eventData to current mouse position
+        eventData.position = Input.mousePosition;
+
+        // Create a list to receive all results of the raycast
+        var results = new System.Collections.Generic.List<RaycastResult>();
+
+        // Raycast into the UI
+        EventSystem.current.RaycastAll(eventData, results);
+
+        // Check if the raycast hit any UI elements
+        return results.Count > 0;
+    }
 }

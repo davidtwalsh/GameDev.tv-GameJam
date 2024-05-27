@@ -30,14 +30,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822074976399740299}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.044878867, y: -0.057167105, z: 0.29131553, w: 0.9538622}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6429213955981298220}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 6.83, y: -4.79, z: 33.68}
 --- !u!212 &8407081924802480252
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -195,6 +195,7 @@ MonoBehaviour:
   maxHP: 20
   normalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
   damageSpriteColor: {r: 1, g: 0, b: 0, a: 1}
+  remainsPrefab: {fileID: 4609308030219828146, guid: ed2276fe485cc5844b8049acdf3aab89, type: 3}
 --- !u!1 &3429430868076806750
 GameObject:
   m_ObjectHideFlags: 0
