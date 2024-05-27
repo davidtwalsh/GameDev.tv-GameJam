@@ -192,7 +192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d4d6b0d2a7d25f44bb788308a6135a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 15
+  maxHP: 20
+  normalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
+  damageSpriteColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &3429430868076806750
 GameObject:
   m_ObjectHideFlags: 0

@@ -101,7 +101,7 @@ public class PlayerUnit : MonoBehaviour
                         transform.localScale = new Vector3(1f, transform.localScale.y, transform.localScale.z);
                     }
                 }
-                if (myAttacker.IsDoneAttacking() == true)
+                if (myAttacker.IsDoneAttacking() == true || attackTarget == null)
                 {
                     startedAttack = false;
                     myAttacker.CleanUpAttack();
