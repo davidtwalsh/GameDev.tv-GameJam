@@ -23,11 +23,15 @@ public class Unit : MonoBehaviour
 
     private GameObject attackTarget;
 
+    private IAttacker myAttacker;
+    private bool startedAttack = false;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        myAttacker = GetComponent<IAttacker>();
     }
-    // Update is called once per frame
+
     void Update()
     {
         switch (state)
@@ -81,6 +85,29 @@ public class Unit : MonoBehaviour
 
             case UnitState.Attacking:
 
+                if (startedAttack == false)
+                {
+                    myAttacker.BeginAttacking(attackTarget);
+                    startedAttack = true;
+                }
+                if (attackTarget != null)
+                {
+                    if (transform.position.x >= attackTarget.transform.position.x)
+                    {
+                        transform.localScale = new Vector3(-1f, transform.localScale.y, transform.localScale.z);
+                    }
+                    else
+                    {
+                        transform.localScale = new Vector3(1f, transform.localScale.y, transform.localScale.z);
+                    }
+                }
+                if (myAttacker.IsDoneAttacking() == true)
+                {
+                    startedAttack = false;
+                    myAttacker.CleanUpAttack();
+                    state = UnitState.Wandering;
+                    break;
+                }
                 break;
         }
     }
