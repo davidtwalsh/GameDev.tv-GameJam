@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IAttack
 {
-    public void AffectTarget();
+    public void AffectTarget(EntityStatus target);
 }

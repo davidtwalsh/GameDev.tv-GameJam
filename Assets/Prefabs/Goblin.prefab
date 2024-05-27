@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6618550763101521333}
   - component: {fileID: 2221618132435173797}
   - component: {fileID: -5071780545506054094}
+  - component: {fileID: -3201193844166929761}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -179,6 +180,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d94f7af181205c24193d2cd7c73c5fb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3201193844166929761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822074976399740299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4d6b0d2a7d25f44bb788308a6135a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 15
 --- !u!1 &3429430868076806750
 GameObject:
   m_ObjectHideFlags: 0

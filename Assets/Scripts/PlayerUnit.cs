@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+public class PlayerUnit : MonoBehaviour
 {
     private UnitState state = UnitState.Wandering;
     [SerializeField]

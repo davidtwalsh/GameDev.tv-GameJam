@@ -6,8 +6,11 @@ public class Projectile : MonoBehaviour
 {
     private bool shouldBeginMovement = false;
     private GameObject target;
+    private IAttack attack;
 
     public float moveSpeed = 5f; // The speed at which to move towards the target
+
+    private float lifeTimer = 0f;
 
     private void Update()
     {
@@ -29,13 +32,46 @@ public class Projectile : MonoBehaviour
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             // Rotate the object to face the target
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+            if (CalculateDistance(transform.position.x, transform.position.y, target.transform.position.x, target.transform.position.y) < .2f)
+            {
+                CollidedWithTarget();
+            }
+        }
+
+        lifeTimer += Time.deltaTime;
+        if (lifeTimer > 10f)
+        {
+            Destroy(gameObject);
         }
     }
 
-    public void Init(GameObject target)
+    public void Init(GameObject target,IAttack attack)
     {
         this.target = target;
         shouldBeginMovement = true;
+        this.attack = attack;
+    }
+
+    private void CollidedWithTarget()
+    {
+        EntityStatus targetStatus = target.GetComponent<EntityStatus>();
+        if (targetStatus != null)
+        {
+            attack.AffectTarget(targetStatus);
+        }
+        Destroy(gameObject);
+    }
+
+    private float CalculateDistance(float x1, float y1, float x2, float y2)
+    {
+        // Calculate the squared differences
+        float dx = x2 - x1;
+        float dy = y2 - y1;
+        float squaredDistance = dx * dx + dy * dy;
+
+        // Return the square root of the squared distance
+        return Mathf.Sqrt(squaredDistance);
     }
 
 }

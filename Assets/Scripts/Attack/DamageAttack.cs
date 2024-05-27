@@ -6,8 +6,8 @@ using UnityEngine;
 public class DamageAttack : IAttack
 {
     public int damage;
-    public void AffectTarget()
+    public void AffectTarget(EntityStatus target)
     {
-        
+        target.DealDamageToEntity(damage);
     }
 }

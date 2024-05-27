@@ -59,7 +59,7 @@ public class ArcherAttacker : MonoBehaviour, IAttacker
         arrow.transform.rotation = bow.transform.rotation;
         arrow.transform.localScale = transform.localScale;
         Projectile projectile = arrow.GetComponent<Projectile>();
-        projectile.Init(target);
+        projectile.Init(target,attack);
     }
 
     private void RotateBow()
