@@ -26,10 +26,16 @@ public class PlayerUnit : MonoBehaviour
     private IAttacker myAttacker;
     private bool startedAttack = false;
 
+    [SerializeField]
+    private float maxWanderDistance = 5f;
+
+    private Vector3 originalPosition;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         myAttacker = GetComponent<IAttacker>();
+        originalPosition = transform.position;
     }
 
     void Update()
@@ -40,10 +46,18 @@ public class PlayerUnit : MonoBehaviour
 
                 if (isMoving == false) //need to find a new point to wander to
                 {
-                    float x = Random.Range(transform.position.x - wanderDistance, transform.position.x + wanderDistance);
-                    float y = Random.Range(transform.position.y - wanderDistance, transform.position.y + wanderDistance);
-                    moveTarget = new Vector3(x, y);
-                    isMoving = true;
+                    int maxAttempts = 25;
+                    for (int i = 0; i < maxAttempts; i++)
+                    {
+                        float x = Random.Range(transform.position.x - wanderDistance, transform.position.x + wanderDistance);
+                        float y = Random.Range(transform.position.y - wanderDistance, transform.position.y + wanderDistance);
+                        if (CalculateDistance(x,y,originalPosition.x,originalPosition.y) < maxWanderDistance)
+                        {
+                            moveTarget = new Vector3(x, y);
+                            isMoving = true;
+                            break;
+                        }
+                    }
                 }
                 if (moveTarget != null && CalculateDistance(transform.position.x,transform.position.y,moveTarget.x,moveTarget.y) < .2f) // pick a new wander target
                 {

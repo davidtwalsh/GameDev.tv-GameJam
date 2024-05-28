@@ -178,8 +178,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.2
-  wanderDistance: 3
+  wanderDistance: 1.5
   attackRange: 4
+  maxWanderDistance: 3
 --- !u!114 &1859255969457751482
 MonoBehaviour:
   m_ObjectHideFlags: 0
