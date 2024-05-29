@@ -130,6 +130,15 @@ public class Wall : MonoBehaviour
             }
         }
     }
+
+    public SpriteRenderer GetSpriteRenderer() 
+    { 
+        return spriteRenderer; 
+    }
+    public EntityStatus GetEntityStatus()
+    {
+        return status;
+    }
     private enum WallType
     {
         OnlyTop,

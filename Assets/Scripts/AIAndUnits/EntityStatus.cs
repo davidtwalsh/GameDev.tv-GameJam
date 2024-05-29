@@ -73,4 +73,18 @@ public class EntityStatus : MonoBehaviour
     {
         return hp;
     }
+
+    public void RestoreHP()
+    {
+        hp = maxHP;
+    }
+
+    public bool IsFullHP()
+    {
+        if (hp == maxHP)
+        {
+            return true;
+        }
+        return false;
+    }
 }

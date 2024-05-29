@@ -41,7 +41,6 @@ public class ObjectPlacer : MonoBehaviour
         {
             // Set this instance as the singleton instance if it's the first one
             Instance = this;
-            DontDestroyOnLoad(this.gameObject); // Optional: Don't destroy this object when loading new scenes
         }
     }
 
@@ -49,8 +48,7 @@ public class ObjectPlacer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            CleanUpOldGhost();
-            placingObject = false;
+            StopPlacing();
         }
 
         if (placingObject == true)
@@ -66,13 +64,13 @@ public class ObjectPlacer : MonoBehaviour
 
             activePlaceable.MoveWithMouse(worldPosition);
 
-            if (ResourceController.Instance.GetNumCoins() - activePlaceable.GetCost() < 0)
+            if (ResourceController.Instance.CanSpendCoins(activePlaceable.GetCost()) == true)
             {
-                canAfford = false;
+                canAfford = true;
             }
             else
             {
-                canAfford = true;
+                canAfford = false;
             }
 
             canPlaceObject = activePlaceable.IsPlaceable(worldPosition);
@@ -80,7 +78,7 @@ public class ObjectPlacer : MonoBehaviour
             {
                 activePlaceGhostSpriteRenderer.color = placableColor;
             }
-            else if (placingObject == false || canAfford == false) 
+            else if (canPlaceObject == false || canAfford == false) 
             {
                 activePlaceGhostSpriteRenderer.color = nonPlacableColor;
             }
@@ -166,5 +164,20 @@ public class ObjectPlacer : MonoBehaviour
 
         // Check if the raycast hit any UI elements
         return results.Count > 0;
+    }
+
+    public void StopPlacing()
+    {
+        CleanUpOldGhost();
+        placingObject = false;
+    }
+
+    public void ResumePlacing()
+    {
+        if (activePlacerGhost != null)
+        {
+            activePlacerGhost.SetActive(true);
+            placingObject = true;
+        }
     }
 }

@@ -24,7 +24,6 @@ public class ResourceController : MonoBehaviour
         {
             // Set this instance as the singleton instance if it's the first one
             Instance = this;
-            DontDestroyOnLoad(this.gameObject); // Optional: Don't destroy this object when loading new scenes
         }
     }
 
@@ -41,5 +40,14 @@ public class ResourceController : MonoBehaviour
     public void SpendCoins(int spent)
     {
         numCoins -= spent;
+    }
+
+    public bool CanSpendCoins(int amountToSpend)
+    {
+        if (numCoins - amountToSpend < 0)
+        {
+            return false;
+        }
+        return true;
     }
 }
