@@ -77,4 +77,14 @@ public class ArcherAttacker : MonoBehaviour, IAttacker
         // Rotate the object to face the target
         bow.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
+
+    public DamageAttack GetDamageAttack()
+    {
+        return attack;
+    }
+
+    public void SetUpgradedAttackTime(float newAttackTime)
+    {
+        attackTime = newAttackTime;
+    }
 }

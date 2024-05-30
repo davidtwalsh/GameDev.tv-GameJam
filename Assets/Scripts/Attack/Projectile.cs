@@ -40,7 +40,7 @@ public class Projectile : MonoBehaviour
         }
 
         lifeTimer += Time.deltaTime;
-        if (lifeTimer > 3f)
+        if (lifeTimer > 3f || target == null)
         {
             Destroy(gameObject);
         }

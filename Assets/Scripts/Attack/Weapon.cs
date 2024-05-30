@@ -5,8 +5,6 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [SerializeField]
-    private float damage;
-    [SerializeField]
     private Enemy weaponUser;
     [SerializeField]
     private DamageAttack damageAttack;

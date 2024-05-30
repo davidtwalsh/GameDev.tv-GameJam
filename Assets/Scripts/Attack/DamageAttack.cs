@@ -5,9 +5,20 @@ using UnityEngine;
 [System.Serializable]
 public class DamageAttack : IAttack
 {
-    public int damage;
+    [SerializeField]
+    private int damage;
     public void AffectTarget(EntityStatus target)
     {
         target.DealDamageToEntity(damage);
+    }
+
+    public int GetDamage()
+    {
+        return damage; 
+    }
+
+    public void UpgradeDamage(int extraDamage)
+    {
+        damage += extraDamage;
     }
 }

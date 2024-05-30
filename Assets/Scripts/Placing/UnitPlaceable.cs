@@ -44,6 +44,11 @@ public class UnitPlaceable : MonoBehaviour, Placeable
     {
         GameObject newObj = Instantiate(unitPrefab, transform.position, Quaternion.identity);
         ObjectPlacer.Instance.GetPlayerAttackables().Add(newObj);
+        ArcherAttacker archer = newObj.GetComponent<ArcherAttacker>();
+        if (archer != null && UpgradeController.Instance.HasUpgradedArcher() == true)
+        {
+            UpgradeController.Instance.UpgradeArcher(archer);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
