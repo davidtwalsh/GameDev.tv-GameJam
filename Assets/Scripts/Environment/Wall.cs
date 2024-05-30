@@ -43,11 +43,11 @@ public class Wall : MonoBehaviour
 
     private bool isStoneWall = false;
 
-
-    private void Start()
+    private void Awake()
     {
         status = GetComponent<EntityStatus>();
     }
+
     public void SetPosition(int x, int y)
     {
         xPosition = x;
@@ -99,11 +99,25 @@ public class Wall : MonoBehaviour
         {
             if (wallType == WallType.FrontAndTop)
             {
-                spriteRenderer.sprite = woodenWallFrontSprite;
+                if (isStoneWall == false)
+                {
+                    spriteRenderer.sprite = woodenWallFrontSprite;
+                }
+                else
+                {
+                    spriteRenderer.sprite = stoneWallFrontSprite;
+                }
             }
             else if (wallType == WallType.OnlyTop)
             {
-                spriteRenderer.sprite = woodenWallTopSprite;
+                if (isStoneWall == false)
+                {
+                    spriteRenderer.sprite = woodenWallTopSprite;
+                }
+                else
+                {
+                    spriteRenderer.sprite = stoneWallTopSprite;
+                }
             }
         }
         else

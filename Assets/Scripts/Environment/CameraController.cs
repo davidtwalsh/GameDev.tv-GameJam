@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -10,6 +11,15 @@ public class CameraController : MonoBehaviour
     private Camera myCamera;
     [SerializeField]
     private float zoomAmplifier = 1f;
+
+    [SerializeField]
+    private float xMin = 0f;
+    [SerializeField]
+    private float xMax = 30f;
+    [SerializeField]
+    private float yMin = 0f;
+    [SerializeField]
+    private float yMax = 30f;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +32,25 @@ public class CameraController : MonoBehaviour
     {
 
         float xAxisValue = Input.GetAxis("Horizontal");
+        if (xAxisValue < 0f && transform.position.x <= xMin)
+        {
+            xAxisValue = 0f;
+        }
+        else if (xAxisValue > 0f && transform.position.x >= xMax)
+        {
+            xAxisValue = 0f;
+        }
+
         float zAxisValue = Input.GetAxis("Vertical");
+        if (zAxisValue < 0f && transform.position.y <= yMin)
+        {
+            zAxisValue = 0f;
+        }
+        else if (zAxisValue > 0f && transform.position.y >= yMax)
+        {
+            zAxisValue = 0f;
+        }
+
         transform.Translate(new Vector3(xAxisValue * Time.deltaTime * speed,zAxisValue * Time.deltaTime * speed,0f));
 
         float mouseScroll = Input.mouseScrollDelta.y * -1;

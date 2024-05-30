@@ -22,7 +22,7 @@ public class EntityStatus : MonoBehaviour
     [SerializeField]
     private UnityEvent onAttackEvent;
 
-    private void Start()
+    private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         hp = maxHP;

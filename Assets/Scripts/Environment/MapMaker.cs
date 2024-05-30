@@ -49,7 +49,7 @@ public class MapMaker : MonoBehaviour
         {
             for (int y = 0; y < ySize; y++)
             {
-                if (x == 0 || x == 1 || y == 0 || y == 1 || x == xSize-1 || x == xSize -2 || y == ySize - 1 || y == ySize - 2)
+                if (x == 0 || y == 0 || x == xSize-1 || y == ySize - 1)
                 {
                     map[x, y] = TileType.Boundary;
                 }
