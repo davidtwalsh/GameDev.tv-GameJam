@@ -22,6 +22,9 @@ public class EntityStatus : MonoBehaviour
     [SerializeField]
     private UnityEvent onAttackEvent;
 
+    [SerializeField]
+    private UnityEvent onDeathEvent;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -40,11 +43,16 @@ public class EntityStatus : MonoBehaviour
     {
         if (hp <= 0)
         {
+            onDeathEvent.Invoke();
+
             if (SpawnController.Instance.GetMonsters().Contains(gameObject))
             {
                 SpawnController.Instance.GetMonsters().Remove(gameObject);
             }
-            ObjectPlacer.Instance.GetPlayerAttackables().Remove(gameObject);
+            if (ObjectPlacer.Instance.GetPlayerAttackables().Contains(gameObject))
+            {
+                ObjectPlacer.Instance.GetPlayerAttackables().Remove(gameObject);
+            }
 
             if (remainsPrefab != null)
             {

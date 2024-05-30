@@ -19,6 +19,14 @@ public class MapMaker : MonoBehaviour
 
     public static MapMaker Instance;
 
+    [SerializeField]
+    private GameObject statuePrefab;
+    [SerializeField]
+    private int statueX;
+    [SerializeField]
+    private int statueY;
+
+
     public Dictionary<(int, int), Wall> walls = new Dictionary<(int, int), Wall>();
 
     void Awake()
@@ -78,6 +86,11 @@ public class MapMaker : MonoBehaviour
                 }
                 GameObject obj = Instantiate(prefab, new Vector2(x, y), Quaternion.identity);
                 obj.transform.parent = transform;
+
+                if (x == statueX &&  y == statueY)
+                {
+                    GameObject statue = Instantiate(statuePrefab,new Vector2(x, y), Quaternion.identity);
+                }
             }
         }
     }
