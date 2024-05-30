@@ -107,6 +107,12 @@ MonoBehaviour:
   woodenWallFrontMajorDamageSprite: {fileID: 21300000, guid: f6ba3e74e8d7e3d42b906756dbcda9fa, type: 3}
   woodenWallTopMinorDamageSprite: {fileID: 21300000, guid: 132409574f550ec4b9d0ed943b284a06, type: 3}
   woodenWallTopMajorDamageSprite: {fileID: 21300000, guid: 494189df83566a84094fbe7f852d8944, type: 3}
+  stoneWallTopSprite: {fileID: 21300000, guid: ca034adcf6d46ba4fa85e6b229202e48, type: 3}
+  stoneWallFrontSprite: {fileID: 21300000, guid: 91855e9a8a228ea438a7225222dbe13c, type: 3}
+  stoneWallFrontMinorDamageSprite: {fileID: 21300000, guid: 8968cb886a612d14db2d3da10abea899, type: 3}
+  stoneWallFrontMajorDamageSprite: {fileID: 21300000, guid: 28e104cd53a38f644a4ba8b3f95bc523, type: 3}
+  stoneWallTopMinorDamageSprite: {fileID: 21300000, guid: 3a7d72bd8bd53c7468513aa942c4f95a, type: 3}
+  stoneWallTopMajorDamageSprite: {fileID: 21300000, guid: a494475533146454fb7bd1c572520d40, type: 3}
 --- !u!50 &4649056445315465324
 Rigidbody2D:
   serializedVersion: 4

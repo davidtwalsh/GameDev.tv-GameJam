@@ -28,6 +28,22 @@ public class Wall : MonoBehaviour
     private Sprite woodenWallTopMajorDamageSprite;
 
 
+    [SerializeField]
+    private Sprite stoneWallTopSprite;
+    [SerializeField]
+    private Sprite stoneWallFrontSprite;
+    [SerializeField]
+    private Sprite stoneWallFrontMinorDamageSprite;
+    [SerializeField]
+    private Sprite stoneWallFrontMajorDamageSprite;
+    [SerializeField]
+    private Sprite stoneWallTopMinorDamageSprite;
+    [SerializeField]
+    private Sprite stoneWallTopMajorDamageSprite;
+
+    private bool isStoneWall = false;
+
+
     private void Start()
     {
         status = GetComponent<EntityStatus>();
@@ -99,33 +115,75 @@ public class Wall : MonoBehaviour
             {
                 if (wallType == WallType.FrontAndTop)
                 {
-                    spriteRenderer.sprite = woodenWallFrontMajorDamageSprite;
+                    if (isStoneWall == false)
+                    {
+                        spriteRenderer.sprite = woodenWallFrontMajorDamageSprite;
+                    }
+                    else
+                    {
+                        spriteRenderer.sprite = stoneWallFrontMajorDamageSprite;
+                    }
                 }
                 else if (wallType == WallType.OnlyTop)
                 {
-                    spriteRenderer.sprite = woodenWallTopMajorDamageSprite;
+                    if (isStoneWall == false)
+                    {
+                        spriteRenderer.sprite = woodenWallTopMajorDamageSprite;
+                    }
+                    else
+                    {
+                        spriteRenderer.sprite = stoneWallTopMajorDamageSprite;
+                    }
                 }
             }
             else if (curHP / maxHP <= .66f)
             {
                 if (wallType == WallType.FrontAndTop)
                 {
-                    spriteRenderer.sprite = woodenWallFrontMinorDamageSprite;
+                    if (isStoneWall == false)
+                    {
+                        spriteRenderer.sprite = woodenWallFrontMinorDamageSprite;
+                    }
+                    else
+                    {
+                        spriteRenderer.sprite = stoneWallFrontMinorDamageSprite;
+                    }
                 }
                 else if (wallType == WallType.OnlyTop)
                 {
-                    spriteRenderer.sprite = woodenWallTopMinorDamageSprite;
+                    if (isStoneWall == false)
+                    {
+                        spriteRenderer.sprite = woodenWallTopMinorDamageSprite;
+                    }
+                    else
+                    {
+                        spriteRenderer.sprite = stoneWallTopMinorDamageSprite;
+                    }
                 }
             }
             else
             {
                 if (wallType == WallType.FrontAndTop)
                 {
-                    spriteRenderer.sprite = woodenWallFrontSprite;
+                    if (isStoneWall == false)
+                    {
+                        spriteRenderer.sprite = woodenWallFrontSprite;
+                    }
+                    else
+                    {
+                        spriteRenderer.sprite = stoneWallFrontSprite;
+                    }
                 }
                 else if (wallType == WallType.OnlyTop)
                 {
-                    spriteRenderer.sprite = woodenWallTopSprite;
+                    if (isStoneWall == false)
+                    {
+                        spriteRenderer.sprite = woodenWallTopSprite;
+                    }
+                    else
+                    {
+                        spriteRenderer.sprite= stoneWallTopSprite;
+                    }
                 }
             }
         }
@@ -138,6 +196,11 @@ public class Wall : MonoBehaviour
     public EntityStatus GetEntityStatus()
     {
         return status;
+    }
+
+    public void SetStoneWall()
+    {
+        isStoneWall = true;
     }
     private enum WallType
     {

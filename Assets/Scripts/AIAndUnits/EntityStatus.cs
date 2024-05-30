@@ -87,4 +87,9 @@ public class EntityStatus : MonoBehaviour
         }
         return false;
     }
+
+    public void AddHP(int hpToAdd)
+    {
+        hp += hpToAdd;
+    }
 }

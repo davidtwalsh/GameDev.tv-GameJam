@@ -61,6 +61,10 @@ public class StructurePlaceable : MonoBehaviour, Placeable
         if (wall != null)
         {
             wall.SetPosition(xMapPosition, yMapPosition);
+            if (UpgradeController.Instance.HasUpgradedWalls())
+            {
+                UpgradeController.Instance.UpgradeWall(wall);
+            }
             wall.SetSprite();
             wall.UpdateOtherSprites();
             MapMaker.Instance.walls.Add((xMapPosition, yMapPosition), wall);

@@ -11,14 +11,20 @@ public class UpgradeController : MonoBehaviour
     [Header("Upgrade Costs")]
     [SerializeField]
     private int upgradeArcherCost;
+    [SerializeField]
+    private int upgradeWallCost;
 
     [Header("Upgrade Improvements")]
     [SerializeField]
     private float upgradedArcherAttackTime;
+    [SerializeField]
+    private int upgradedWallMaxHPIncrease;
 
     [Header("Upgrade Sprites")]
     [SerializeField]
     private Sprite upgradedArcherSprite;
+    [SerializeField]
+    private Sprite upgradedWallSprite;
 
     [Header("UI")]
     [SerializeField]
@@ -27,8 +33,15 @@ public class UpgradeController : MonoBehaviour
     private GameObject upgradeArcherButton;
     [SerializeField]
     private Image placeArcherImage;
+    [SerializeField]
+    private TextMeshProUGUI upgradeWallCostText;
+    [SerializeField]
+    private GameObject upgradeWallButton;
+    [SerializeField]
+    private Image placeWallImage;
 
     private bool upgradedArcher = false;
+    private bool upgradedWall = false;
 
 
     void Awake()
@@ -62,6 +75,18 @@ public class UpgradeController : MonoBehaviour
         }
     }
 
+    public void UpgradeWalls()
+    {
+        if (ResourceController.Instance.CanSpendCoins(upgradeWallCost) == true)
+        {
+            upgradedWall = true;
+            ResourceController.Instance.SpendCoins(upgradeWallCost);
+            UpdateAllCurrentWalls();
+            upgradeWallButton.SetActive(false);
+            placeWallImage.sprite = upgradedWallSprite;
+        }
+    }
+
     private void UpdateAllCurrentArchers()
     {
         List<GameObject> playerObjects = ObjectPlacer.Instance.GetPlayerAttackables();
@@ -72,6 +97,30 @@ public class UpgradeController : MonoBehaviour
             {
                 UpgradeArcher(archer);
             }
+        }
+    }
+
+    private void UpdateAllCurrentWalls()
+    {
+        List<GameObject> playerObjects = ObjectPlacer.Instance.GetPlayerAttackables();
+        foreach (GameObject playerObject in playerObjects)
+        {
+            Wall wall = playerObject.GetComponent<Wall>();
+            if (wall != null)
+            {
+                UpgradeWall(wall);
+            }
+        }
+    }
+
+    public void UpgradeWall(Wall wall)
+    {
+        wall.SetStoneWall();
+        wall.CheckIfNeedToUpdateWallSprite();
+        EntityStatus status = wall.GetComponent<EntityStatus>();
+        if (status != null)
+        {
+            status.AddHP(upgradedWallMaxHPIncrease);
         }
     }
 
@@ -89,5 +138,10 @@ public class UpgradeController : MonoBehaviour
     public bool HasUpgradedArcher()
     {
         return upgradedArcher;
+    }
+
+    public bool HasUpgradedWalls()
+    {
+        return upgradedWall;
     }
 }
