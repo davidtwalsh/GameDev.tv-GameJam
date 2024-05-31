@@ -6,6 +6,9 @@ public class WinConditionController : MonoBehaviour
 {
     public static WinConditionController Instance;
 
+    [SerializeField]
+    private GameObject lostPanel;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -22,7 +25,16 @@ public class WinConditionController : MonoBehaviour
 
     public void LostGame()
     {
-        Debug.Log("Game is over");
+        StartCoroutine(LostGameCoroutine());
+    }
+
+    IEnumerator LostGameCoroutine()
+    {
+        lostPanel.SetActive(true);
+
+        yield return new WaitForSeconds(8f);
+
+        SceneController.Instance.LoadScene("LostScene");
     }
 
     public void WonGame()
