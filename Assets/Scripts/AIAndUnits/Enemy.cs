@@ -21,6 +21,13 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private Animator weaponAnimator;
 
+    private Vector3 spawnPosition;
+
+    private void Start()
+    {
+        spawnPosition = transform.position;
+    }
+
     void Update()
     {
         float dstToTarget;
@@ -71,6 +78,10 @@ public class Enemy : MonoBehaviour
                     break;
                 }
                 break;
+            case EnemyState.Fleeing:
+                weaponAnimator.SetBool("isAttacking", false);
+                break;
+
         }
     }
 
@@ -118,7 +129,7 @@ public class Enemy : MonoBehaviour
 
                 if (direction.x > 0)
                 {
-                    transform.localScale = new Vector3(1f,transform.localScale.y,transform.localScale.z);
+                    transform.localScale = new Vector3(1f, transform.localScale.y, transform.localScale.z);
                 }
                 else if (direction.x < 0)
                 {
@@ -128,6 +139,23 @@ public class Enemy : MonoBehaviour
                 // Move towards the target point
                 rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
             }
+        }
+        else if (state == EnemyState.Fleeing)
+        {
+            Vector2 targetPos = new Vector2(spawnPosition.x, spawnPosition.y);
+            Vector2 direction = (targetPos - rb.position).normalized;
+
+            if (direction.x > 0)
+            {
+                transform.localScale = new Vector3(1f, transform.localScale.y, transform.localScale.z);
+            }
+            else if (direction.x < 0)
+            {
+                transform.localScale = new Vector3(-1f, transform.localScale.y, transform.localScale.z);
+            }
+
+            // Move towards the target point
+            rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
         }
     }
 
@@ -146,11 +174,17 @@ public class Enemy : MonoBehaviour
     {
         return target;
     }
+
+    public void SetState(EnemyState state)
+    {
+        this.state = state;
+    }
 }
 
 public enum EnemyState
 {
     FindingTarget,
     MovingToTarget,
-    Attacking
+    Attacking,
+    Fleeing
 }

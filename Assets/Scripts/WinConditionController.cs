@@ -9,6 +9,9 @@ public class WinConditionController : MonoBehaviour
     [SerializeField]
     private GameObject lostPanel;
 
+    [SerializeField]
+    private GameObject wonPanel;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -23,6 +26,14 @@ public class WinConditionController : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            WonGame();
+        }
+    }
+
     public void LostGame()
     {
         StartCoroutine(LostGameCoroutine());
@@ -32,13 +43,33 @@ public class WinConditionController : MonoBehaviour
     {
         lostPanel.SetActive(true);
 
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(12f);
 
         SceneController.Instance.LoadScene("LostScene");
     }
 
     public void WonGame()
     {
-        Debug.Log("Game won");
+        StartCoroutine (WonGameCoroutine());
+    }
+
+    IEnumerator WonGameCoroutine()
+    {
+        wonPanel.SetActive(true);
+
+        List<GameObject> monsters = SpawnController.Instance.GetMonsters();
+        foreach (GameObject monster in monsters)
+        {
+            Enemy enemy = monster.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.SetState(EnemyState.Fleeing);
+            }
+        }
+
+        yield return new WaitForSeconds(12f);
+
+        SceneController.Instance.LoadScene("WonScene");
+
     }
 }
