@@ -9,4 +9,6 @@ public interface IAttacker
     public void BeginAttacking(GameObject target);
 
     public void CleanUpAttack();
+
+    public GameObject GetAttackTarget(float attackRange);
 }

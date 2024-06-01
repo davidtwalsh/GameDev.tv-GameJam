@@ -314,6 +314,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wand: {fileID: 596506109880027497}
   spellPrefab: {fileID: 685358375428124290, guid: eaf058d214a366a4d9ef07054b05dac9, type: 3}
-  attackTime: 4
+  attackTime: 2
   attack:
-    damage: 30
+    polymorphTime: 5

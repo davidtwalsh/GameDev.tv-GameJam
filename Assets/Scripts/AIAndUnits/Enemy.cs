@@ -23,6 +23,19 @@ public class Enemy : MonoBehaviour
 
     private Vector3 spawnPosition;
 
+    private SpriteRenderer spriteRenderer;
+    private Sprite originalSprite;
+
+    private bool isWandering = false;
+    Vector2 wanderTarget;
+    private float newWanderTargetTimer = 0f;
+
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalSprite = spriteRenderer.sprite;
+    }
     private void Start()
     {
         spawnPosition = transform.position;
@@ -45,7 +58,7 @@ public class Enemy : MonoBehaviour
                 //move in fixed update
                 if (target != null)
                 {
-                    dstToTarget = CalculateDistance(transform.position.x, transform.position.y, target.transform.position.x, target.transform.position.y);
+                    dstToTarget = MathHelper.CalculateDistance(transform.position.x, transform.position.y, target.transform.position.x, target.transform.position.y);
                     if (dstToTarget < attackDistance)
                     {
                         rb.velocity = Vector3.zero;
@@ -70,7 +83,7 @@ public class Enemy : MonoBehaviour
                 {
                     weaponAnimator.SetBool("isAttacking", true);
                 }
-                dstToTarget = CalculateDistance(transform.position.x, transform.position.y, target.transform.position.x, target.transform.position.y);
+                dstToTarget = MathHelper.CalculateDistance(transform.position.x, transform.position.y, target.transform.position.x, target.transform.position.y);
                 if (dstToTarget > attackDistance + .2f)
                 {
                     weaponAnimator.SetBool("isAttacking", false);
@@ -80,6 +93,27 @@ public class Enemy : MonoBehaviour
                 break;
             case EnemyState.Fleeing:
                 weaponAnimator.SetBool("isAttacking", false);
+                break;
+            case EnemyState.Polymorphed:
+
+                if (isWandering == false) //need to find a new point to wander to
+                {
+                    float x = Random.Range(transform.position.x - 3, transform.position.x + 3);
+                    float y = Random.Range(transform.position.y - 3, transform.position.y + 3);
+                    wanderTarget = new Vector3(x, y);
+                    isWandering = true;
+                }
+                if (wanderTarget != null && MathHelper.CalculateDistance(transform.position.x, transform.position.y, wanderTarget.x, wanderTarget.y) < .2f) // pick a new wander target
+                {
+                    isWandering = false;
+                }
+
+                newWanderTargetTimer += Time.deltaTime;
+                if (newWanderTargetTimer > 3f)
+                {
+                    isWandering = false;
+                    newWanderTargetTimer = 0f;
+                }
                 break;
 
         }
@@ -97,7 +131,7 @@ public class Enemy : MonoBehaviour
             float myX = transform.position.x;
             float myY = transform.position.y;
 
-            float dstToAttackable = CalculateDistance(xx, yy, myX, myY);
+            float dstToAttackable = MathHelper.CalculateDistance(xx, yy, myX, myY);
             if (dstToAttackable < curClosestDst)
             {
                 curClosestDst = dstToAttackable;
@@ -157,17 +191,26 @@ public class Enemy : MonoBehaviour
             // Move towards the target point
             rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
         }
-    }
+        else if (state == EnemyState.Polymorphed)
+        {
+            if (isWandering == true && wanderTarget != null)
+            {
+                Vector2 direction = (wanderTarget - rb.position).normalized;
 
-    private float CalculateDistance(float x1, float y1, float x2, float y2)
-    {
-        // Calculate the squared differences
-        float dx = x2 - x1;
-        float dy = y2 - y1;
-        float squaredDistance = dx * dx + dy * dy;
+                if (direction.x > 0)
+                {
+                    transform.localScale = new Vector3(1f, transform.localScale.y, transform.localScale.z);
+                }
+                else if (direction.x < 0)
+                {
+                    transform.localScale = new Vector3(-1f, transform.localScale.y, transform.localScale.z);
+                }
 
-        // Return the square root of the squared distance
-        return Mathf.Sqrt(squaredDistance);
+                // Move towards the target point
+                rb.MovePosition(rb.position + direction * .3f * Time.fixedDeltaTime);
+
+            }
+        }
     }
 
     public GameObject getTarget()
@@ -179,6 +222,25 @@ public class Enemy : MonoBehaviour
     {
         this.state = state;
     }
+
+    public void SetPolymorphed()
+    {
+        weaponAnimator.gameObject.SetActive(false);
+        spriteRenderer.sprite = SpriteController.Instance.GetSheepSprite();
+        SetState(EnemyState.Polymorphed);
+    }
+
+    public void EndPolymorph()
+    {
+        weaponAnimator.gameObject.SetActive(true);
+        spriteRenderer.sprite = originalSprite;
+        SetState(EnemyState.FindingTarget);
+    }
+
+    public void SetOriginalSprite()
+    {
+        spriteRenderer.sprite = originalSprite;
+    }
 }
 
 public enum EnemyState
@@ -186,5 +248,6 @@ public enum EnemyState
     FindingTarget,
     MovingToTarget,
     Attacking,
-    Fleeing
+    Fleeing,
+    Polymorphed
 }

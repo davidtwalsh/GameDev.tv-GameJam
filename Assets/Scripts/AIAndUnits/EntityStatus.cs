@@ -25,10 +25,25 @@ public class EntityStatus : MonoBehaviour
     [SerializeField]
     private UnityEvent onDeathEvent;
 
+    private float polymorphTime = 0f;
+    private bool isPolymorphed = false;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         hp = maxHP;
+    }
+
+    private void Update()
+    {
+        if (isPolymorphed)
+        {
+            polymorphTime -= Time.deltaTime;
+            if (polymorphTime <= 0f)
+            {
+                EndPolymorph();
+            }
+        }
     }
 
     public void DealDamageToEntity(float damage)
@@ -37,6 +52,27 @@ public class EntityStatus : MonoBehaviour
         onAttackEvent.Invoke();
         CheckHP();
         StartCoroutine(FlashSprite());
+    }
+
+    public void PolymorphEntity(float polymorphTime)
+    {
+        Enemy enemy = GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.SetPolymorphed();
+            isPolymorphed = true;
+            this.polymorphTime = polymorphTime;
+        }
+    }
+
+    public void EndPolymorph()
+    {
+        isPolymorphed = false;
+        Enemy enemy = GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.EndPolymorph(); 
+        }
     }
 
     private void CheckHP()
@@ -99,5 +135,10 @@ public class EntityStatus : MonoBehaviour
     public void AddHP(int hpToAdd)
     {
         hp += hpToAdd;
+    }
+
+    public bool IsPolymorphed()
+    {
+        return isPolymorphed;
     }
 }

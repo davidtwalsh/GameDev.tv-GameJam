@@ -87,4 +87,21 @@ public class ArcherAttacker : MonoBehaviour, IAttacker
     {
         attackTime = newAttackTime;
     }
+
+    public GameObject GetAttackTarget(float attackRange)
+    {
+        GameObject closestMonsterInRange = null;
+        float minDst = 99999f;
+        foreach (GameObject monster in SpawnController.Instance.GetMonsters())
+        {
+            float dstToMonster = MathHelper.CalculateDistance(transform.position.x, transform.position.y, monster.transform.position.x, monster.transform.position.y);
+            if (dstToMonster < attackRange && dstToMonster < minDst)
+            {
+                closestMonsterInRange = monster;
+                minDst = dstToMonster;
+            }
+        }
+        return closestMonsterInRange;
+    }
+
 }

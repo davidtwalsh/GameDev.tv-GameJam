@@ -51,7 +51,7 @@ public class PlayerUnit : MonoBehaviour
                     {
                         float x = Random.Range(transform.position.x - wanderDistance, transform.position.x + wanderDistance);
                         float y = Random.Range(transform.position.y - wanderDistance, transform.position.y + wanderDistance);
-                        if (CalculateDistance(x,y,originalPosition.x,originalPosition.y) < maxWanderDistance)
+                        if (MathHelper.CalculateDistance(x,y,originalPosition.x,originalPosition.y) < maxWanderDistance)
                         {
                             moveTarget = new Vector3(x, y);
                             isMoving = true;
@@ -59,7 +59,7 @@ public class PlayerUnit : MonoBehaviour
                         }
                     }
                 }
-                if (moveTarget != null && CalculateDistance(transform.position.x,transform.position.y,moveTarget.x,moveTarget.y) < .2f) // pick a new wander target
+                if (moveTarget != null && MathHelper.CalculateDistance(transform.position.x,transform.position.y,moveTarget.x,moveTarget.y) < .2f) // pick a new wander target
                 {
                     isMoving = false;
                 }
@@ -75,22 +75,12 @@ public class PlayerUnit : MonoBehaviour
                 checkMonsterDistTimer += Time.deltaTime;
                 if (checkMonsterDistTimer > .5f)
                 {
-                    GameObject closestMonsterInRange = null;
-                    float minDst = 99999f;
-                    foreach (GameObject monster in SpawnController.Instance.GetMonsters())
-                    {
-                        float dstToMonster = CalculateDistance(transform.position.x,transform.position.y,monster.transform.position.x,monster.transform.position.y);
-                        if (dstToMonster < attackRange && dstToMonster < minDst)
-                        {
-                            closestMonsterInRange = monster;
-                            minDst = dstToMonster;
-                        }
-                    }
+                    GameObject monster = myAttacker.GetAttackTarget(attackRange);
                     checkMonsterDistTimer = 0f;
-                    if (closestMonsterInRange != null)
+                    if (monster != null)
                     {
                         isMoving = false;
-                        attackTarget = closestMonsterInRange;
+                        attackTarget = monster;
                         state = UnitState.Attacking;
                         break;
                     }
@@ -145,17 +135,6 @@ public class PlayerUnit : MonoBehaviour
             rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
             
         }
-    }
-
-    private float CalculateDistance(float x1, float y1, float x2, float y2)
-    {
-        // Calculate the squared differences
-        float dx = x2 - x1;
-        float dy = y2 - y1;
-        float squaredDistance = dx * dx + dy * dy;
-
-        // Return the square root of the squared distance
-        return Mathf.Sqrt(squaredDistance);
     }
 }
 

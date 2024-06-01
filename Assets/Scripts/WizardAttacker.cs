@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,11 +20,13 @@ public class WizardAttacker : MonoBehaviour, IAttacker
     private float attackTimer = 0f;
 
     [SerializeField]
-    private DamageAttack attack;
+    private PolymorphAttack attack;
+
+    private bool isDoneCasting = false;
 
     void Update()
     {
-        if (isAttacking && target != null)
+        if (isAttacking && target != null && isDoneCasting == false)
         {
             RotateWand();
             attackTimer += Time.deltaTime;
@@ -39,12 +42,12 @@ public class WizardAttacker : MonoBehaviour, IAttacker
     {
         isAttacking = true;
         this.target = target;
-
+        isDoneCasting = false;
     }
 
     public bool IsDoneAttacking()
     {
-        return false;
+        return isDoneCasting;
     }
 
     public void CleanUpAttack()
@@ -60,6 +63,7 @@ public class WizardAttacker : MonoBehaviour, IAttacker
         spell.transform.localScale = transform.localScale;
         Projectile projectile = spell.GetComponent<Projectile>();
         projectile.Init(target, attack);
+        isDoneCasting = true;
     }
 
     private void RotateWand()
@@ -78,7 +82,7 @@ public class WizardAttacker : MonoBehaviour, IAttacker
         wand.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    public DamageAttack GetDamageAttack()
+    public PolymorphAttack GetDamageAttack()
     {
         return attack;
     }
@@ -87,4 +91,55 @@ public class WizardAttacker : MonoBehaviour, IAttacker
     {
         attackTime = newAttackTime;
     }
+
+    public GameObject GetAttackTarget(float attackRange)
+    {
+        List<EntityStatus> statusesOfMonstersInRange = new List<EntityStatus>();
+
+        foreach (GameObject monster in SpawnController.Instance.GetMonsters())
+        {
+            float dstToMonster = MathHelper.CalculateDistance(transform.position.x, transform.position.y, monster.transform.position.x, monster.transform.position.y);
+            if (dstToMonster < attackRange)
+            {
+                EntityStatus status = monster.GetComponent<EntityStatus>();
+                if (status != null)
+                {
+                    statusesOfMonstersInRange.Add(status);
+                }
+            }
+        }
+
+        List<EntityStatus> nonPolymorphed = new List<EntityStatus>();
+        foreach (EntityStatus status in statusesOfMonstersInRange)
+        {
+            if (status.IsPolymorphed() == false)
+            {
+                nonPolymorphed.Add(status);
+            }
+        }
+
+        if (nonPolymorphed.Count > 0)
+        {
+            //Get Closest one
+            GameObject closestMonsterInRange = null;
+            float minDst = 99999f;
+            foreach (EntityStatus status in nonPolymorphed)
+            {
+                float dstToMonster = MathHelper.CalculateDistance(transform.position.x, transform.position.y, status.gameObject.transform.position.x, status.gameObject.transform.position.y);
+                if (dstToMonster < attackRange && dstToMonster < minDst)
+                {
+                    closestMonsterInRange = status.gameObject;
+                    minDst = dstToMonster;
+                }
+            }
+            if (closestMonsterInRange != null)
+            {
+                return closestMonsterInRange;
+            }
+        }
+
+        return null;
+    }
+
+
 }
