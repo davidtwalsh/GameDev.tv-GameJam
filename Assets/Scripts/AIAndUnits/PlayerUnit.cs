@@ -31,6 +31,8 @@ public class PlayerUnit : MonoBehaviour
 
     private Vector3 originalPosition;
 
+    private bool isInTower = false;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -44,7 +46,7 @@ public class PlayerUnit : MonoBehaviour
         {
             case UnitState.Wandering:
 
-                if (isMoving == false) //need to find a new point to wander to
+                if (isMoving == false && isInTower == false) //need to find a new point to wander to
                 {
                     int maxAttempts = 25;
                     for (int i = 0; i < maxAttempts; i++)
@@ -75,7 +77,12 @@ public class PlayerUnit : MonoBehaviour
                 checkMonsterDistTimer += Time.deltaTime;
                 if (checkMonsterDistTimer > .5f)
                 {
-                    GameObject monster = myAttacker.GetAttackTarget(attackRange);
+                    float curAttackRange = attackRange;
+                    if (isInTower == true)
+                    {
+                        curAttackRange += UpgradeController.Instance.GetTowerRangeBonus();
+                    }
+                    GameObject monster = myAttacker.GetAttackTarget(curAttackRange);
                     checkMonsterDistTimer = 0f;
                     if (monster != null)
                     {
@@ -135,6 +142,19 @@ public class PlayerUnit : MonoBehaviour
             rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
             
         }
+    }
+
+    private void LateUpdate()
+    {
+        if (isInTower == true)
+        {
+            rb.velocity = Vector2.zero;
+        }
+    }
+    public void SetIsInTower(bool inTower)
+    {
+        isInTower = inTower;
+
     }
 }
 

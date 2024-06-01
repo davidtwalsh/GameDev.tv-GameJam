@@ -31,9 +31,26 @@ public class EntityStatus : MonoBehaviour
     [SerializeField]
     private bool isArmoured = false;
 
+    private List<SpriteRenderer> childrenSpriteRenderers = new List<SpriteRenderer>();
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null) //use children sprite renderers then
+        {
+            // Loop through each child of the parent transform
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                // Get the child transform at index i
+                Transform childTransform = transform.GetChild(i);
+
+                SpriteRenderer spr = childTransform.GetComponent<SpriteRenderer>();
+                if (spr != null)
+                {
+                    childrenSpriteRenderers.Add(spr);
+                }
+            }
+        }
         hp = maxHP;
     }
 
@@ -58,7 +75,14 @@ public class EntityStatus : MonoBehaviour
         hp -= damage;
         onAttackEvent.Invoke();
         CheckHP();
-        StartCoroutine(FlashSprite());
+        if (spriteRenderer != null)
+        {
+            StartCoroutine(FlashSprite());
+        }
+        else if (childrenSpriteRenderers.Count > 0)
+        {
+            StartCoroutine(FlashChildrenSprites());
+        }
     }
 
     public void PolymorphEntity(float polymorphTime)
@@ -113,6 +137,22 @@ public class EntityStatus : MonoBehaviour
         spriteRenderer.color = damageSpriteColor;
         yield return new WaitForSeconds(.1f);
         spriteRenderer.color = normalSpriteColor;
+    }
+
+    IEnumerator FlashChildrenSprites()
+    {
+        foreach (SpriteRenderer spriteRenderer in childrenSpriteRenderers)
+        {
+            spriteRenderer.color = damageSpriteColor;
+        }
+
+        yield return new WaitForSeconds(.1f);
+
+        foreach (SpriteRenderer spriteRenderer in childrenSpriteRenderers)
+        {
+            spriteRenderer.color = normalSpriteColor;
+        }
+        
     }
 
     public float GetMaxHP()

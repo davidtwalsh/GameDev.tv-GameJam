@@ -50,6 +50,9 @@ TagManager:
   - name: Entities
     uniqueID: 23009183
     locked: 0
+  - name: Tower
+    uniqueID: 2683879933
+    locked: 0
   - name: UI
     uniqueID: 2873143377
     locked: 0

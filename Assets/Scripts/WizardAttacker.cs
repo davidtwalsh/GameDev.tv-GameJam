@@ -141,5 +141,4 @@ public class WizardAttacker : MonoBehaviour, IAttacker
         return null;
     }
 
-
 }

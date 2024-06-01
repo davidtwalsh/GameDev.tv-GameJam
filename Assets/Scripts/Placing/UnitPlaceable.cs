@@ -18,6 +18,9 @@ public class UnitPlaceable : MonoBehaviour, Placeable
     [SerializeField]
     private TextMeshProUGUI costText;
 
+    private bool isOverTower = false;
+    private Tower tower;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,7 +34,7 @@ public class UnitPlaceable : MonoBehaviour, Placeable
     public bool IsPlaceable(Vector3 worldPosition)
     {
         bool result = false;
-        if (colliders.Count == 0)
+        if (colliders.Count == 0 || (colliders.Count == 1 && isOverTower == true))
         {
             result = true;
         }
@@ -52,7 +55,11 @@ public class UnitPlaceable : MonoBehaviour, Placeable
     public void Place(Vector3 worldPosition)
     {
         GameObject newObj = Instantiate(unitPrefab, transform.position, Quaternion.identity);
-        ObjectPlacer.Instance.GetPlayerAttackables().Add(newObj);
+        if (isOverTower == false)
+        {
+            ObjectPlacer.Instance.GetPlayerAttackables().Add(newObj);
+        }
+
         ArcherAttacker archer = newObj.GetComponent<ArcherAttacker>();
         if (archer != null && UpgradeController.Instance.HasUpgradedArcher() == true)
         {
@@ -69,6 +76,31 @@ public class UnitPlaceable : MonoBehaviour, Placeable
             UpgradeController.Instance.UpgradeCrossbowMan(crossbowMan);
         }
 
+        if (isOverTower == true)
+        {
+            bool placedUnitInTower = false;
+            SpriteRenderer spriteRenderer = newObj.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.sortingLayerName = "Tower";
+            }
+            PlayerUnit playerUnit = newObj.GetComponent<PlayerUnit>();
+            if (playerUnit != null)
+            {
+                playerUnit.SetIsInTower(true);
+                if (tower != null)
+                {
+                    tower.AddUnit(playerUnit);
+                    ObjectPlacer.Instance.GetToweredUnits().Add(newObj);
+                    placedUnitInTower = true;
+                }
+            }
+            if (placedUnitInTower == false)
+            {
+                ObjectPlacer.Instance.GetPlayerAttackables().Add(newObj);
+            }
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -76,6 +108,19 @@ public class UnitPlaceable : MonoBehaviour, Placeable
         if (colliders.Contains(collision.gameObject) == false)
         {
             colliders.Add(collision.gameObject);
+        }
+        if (collision.tag == "Tower")
+        {
+            isOverTower = true;
+            if (collision.gameObject.transform.parent != null)
+            {
+                Tower t = collision.transform.parent.GetComponent<Tower>();
+                if (t != null)
+                {
+                    tower = t;
+                }
+            }
+
         }
     }
 
@@ -93,6 +138,12 @@ public class UnitPlaceable : MonoBehaviour, Placeable
         if (colliders.Contains(collision.gameObject) == true)
         {
             colliders.Remove(collision.gameObject);
+        }
+        
+        if (collision.tag == "Tower")
+        {
+            isOverTower = false;
+            tower = null;
         }
     }
     public int GetCost()

@@ -19,6 +19,8 @@ public class ObjectPlacer : MonoBehaviour
     private GameObject wizardPlacerGhost;
     [SerializeField]
     private GameObject crossbowManPlacerGhost;
+    [SerializeField]
+    private GameObject towerPlacerGhost;
 
     private bool placingObject = false;
     private bool canPlaceObject = false;
@@ -31,6 +33,8 @@ public class ObjectPlacer : MonoBehaviour
     public static ObjectPlacer Instance;
 
     private List<GameObject> playerAttackables = new List<GameObject>();
+
+    private List<GameObject> toweredUnits = new List<GameObject>();
 
     private bool canAfford = true;
 
@@ -119,6 +123,11 @@ public class ObjectPlacer : MonoBehaviour
         return playerAttackables;
     }
 
+    public List<GameObject> GetToweredUnits()
+    {
+        return toweredUnits;
+    }
+
     private void SetUpNewGhost(GameObject newGhost)
     {
         placingObject = true;
@@ -158,6 +167,12 @@ public class ObjectPlacer : MonoBehaviour
     {
         CleanUpOldGhost();
         SetUpNewGhost(crossbowManPlacerGhost);
+    }
+
+    public void SetPlacingTower()
+    {
+        CleanUpOldGhost();
+        SetUpNewGhost(towerPlacerGhost);
     }
 
     bool IsPointerOverUIObject()

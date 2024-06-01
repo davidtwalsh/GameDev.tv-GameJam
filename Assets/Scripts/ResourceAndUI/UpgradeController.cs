@@ -72,6 +72,9 @@ public class UpgradeController : MonoBehaviour
     private bool upgradedWizard = false;
     private bool upgradedCrossbowMan = false;
 
+    [SerializeField]
+    private float towerRangeBonus = 3f;
+
 
     void Awake()
     {
@@ -154,6 +157,14 @@ public class UpgradeController : MonoBehaviour
                 UpgradeArcher(archer);
             }
         }
+        foreach (GameObject towerUnit in ObjectPlacer.Instance.GetToweredUnits())
+        {
+            ArcherAttacker archer = towerUnit.GetComponent<ArcherAttacker>();
+            if (archer != null)
+            {
+                UpgradeArcher(archer);
+            }
+        }
     }
 
     private void UpdateAllCurrentCrossbowMen()
@@ -162,6 +173,14 @@ public class UpgradeController : MonoBehaviour
         foreach (GameObject playerObject in playerObjects)
         {
             CrossbowAttacker crossbowMan = playerObject.GetComponent<CrossbowAttacker>();
+            if (crossbowMan != null)
+            {
+                UpgradeCrossbowMan(crossbowMan);
+            }
+        }
+        foreach (GameObject towerUnit in ObjectPlacer.Instance.GetToweredUnits())
+        {
+            CrossbowAttacker crossbowMan = towerUnit.GetComponent<CrossbowAttacker>();
             if (crossbowMan != null)
             {
                 UpgradeCrossbowMan(crossbowMan);
@@ -180,6 +199,14 @@ public class UpgradeController : MonoBehaviour
                 UpgradeWizard(wizard);
             }
         }
+        foreach (GameObject towerUnit in ObjectPlacer.Instance.GetToweredUnits())
+        {
+            WizardAttacker wizard = towerUnit.GetComponent<WizardAttacker>();
+            if (wizard != null)
+            {
+                UpgradeWizard(wizard);
+            }
+        }
     }
 
     private void UpdateAllCurrentWalls()
@@ -188,6 +215,14 @@ public class UpgradeController : MonoBehaviour
         foreach (GameObject playerObject in playerObjects)
         {
             Wall wall = playerObject.GetComponent<Wall>();
+            if (wall != null)
+            {
+                UpgradeWall(wall);
+            }
+        }
+        foreach (GameObject towerUnit in ObjectPlacer.Instance.GetToweredUnits())
+        {
+            Wall wall = towerUnit.GetComponent<Wall>();
             if (wall != null)
             {
                 UpgradeWall(wall);
@@ -255,5 +290,10 @@ public class UpgradeController : MonoBehaviour
     public bool HasUpgradedCrossbowMan()
     {
         return upgradedCrossbowMan;
+    }
+
+    public float GetTowerRangeBonus()
+    {
+        return towerRangeBonus;
     }
 }
