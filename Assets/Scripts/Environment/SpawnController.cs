@@ -12,6 +12,9 @@ public class SpawnController : MonoBehaviour
     [SerializeField]
     private GameObject trollPrefab;
 
+    [SerializeField]
+    private GameObject armouredGoblinPrefab;
+
     public static SpawnController Instance;
 
     private List<GameObject> monsters = new List<GameObject>();
@@ -48,11 +51,15 @@ public class SpawnController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SpawnGoblin();
+            SpawnMonsterTest(goblinPrefab);
         }
         if (Input.GetKeyDown(KeyCode.T))
         {
-            SpawnTroll();
+            SpawnMonsterTest(trollPrefab);
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            SpawnMonsterTest(armouredGoblinPrefab);
         }
 
         if (hasStarted == true)
@@ -73,7 +80,7 @@ public class SpawnController : MonoBehaviour
         }
     }
 
-    private void SpawnGoblin()
+    private void SpawnMonsterTest(GameObject prefab)
     {
         if (spawns == null || spawns.Count == 0)
         {
@@ -81,19 +88,7 @@ public class SpawnController : MonoBehaviour
         }
         // Generate a random index within the bounds of the list
         int randomIndex = Random.Range(0, spawns.Count);
-        GameObject monster = Instantiate(goblinPrefab, spawns[randomIndex], Quaternion.identity);
-        monsters.Add(monster);
-    }
-
-    private void SpawnTroll()
-    {
-        if (spawns == null || spawns.Count == 0)
-        {
-            return;
-        }
-        // Generate a random index within the bounds of the list
-        int randomIndex = Random.Range(0, spawns.Count);
-        GameObject monster = Instantiate(trollPrefab, spawns[randomIndex], Quaternion.identity);
+        GameObject monster = Instantiate(prefab, spawns[randomIndex], Quaternion.identity);
         monsters.Add(monster);
     }
 

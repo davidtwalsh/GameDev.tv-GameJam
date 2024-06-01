@@ -28,6 +28,9 @@ public class EntityStatus : MonoBehaviour
     private float polymorphTime = 0f;
     private bool isPolymorphed = false;
 
+    [SerializeField]
+    private bool isArmoured = false;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -46,8 +49,12 @@ public class EntityStatus : MonoBehaviour
         }
     }
 
-    public void DealDamageToEntity(float damage)
+    public void DealDamageToEntity(float damage,bool isPercingAttack)
     {
+        if (isArmoured == true && isPercingAttack == false)
+        {
+            damage = damage / 4;
+        }
         hp -= damage;
         onAttackEvent.Invoke();
         CheckHP();
