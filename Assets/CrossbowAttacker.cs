@@ -83,9 +83,9 @@ public class CrossbowAttacker : MonoBehaviour, IAttacker
         return attack;
     }
 
-    public void SetUpgradedAttackTime(float newAttackTime)
+    public void SetUpgradedAttackDamage(int upgradedDamageAmount)
     {
-        attackTime = newAttackTime;
+        attack.UpgradeDamage(upgradedDamageAmount);
     }
 
     public GameObject GetAttackTarget(float attackRange)

@@ -63,6 +63,11 @@ public class UnitPlaceable : MonoBehaviour, Placeable
         {
             UpgradeController.Instance.UpgradeWizard(wizard);
         }
+        CrossbowAttacker crossbowMan = newObj.GetComponent<CrossbowAttacker>();
+        if (crossbowMan != null && UpgradeController.Instance.HasUpgradedCrossbowMan() == true)
+        {
+            UpgradeController.Instance.UpgradeCrossbowMan(crossbowMan);
+        }
 
     }
 

@@ -317,5 +317,5 @@ MonoBehaviour:
   arrowPrefab: {fileID: 685358375428124290, guid: acf4e7272ca644648a036a9926ca6b57, type: 3}
   attackTime: 3
   attack:
-    damage: 20
+    damage: 15
     isPiercing: 1

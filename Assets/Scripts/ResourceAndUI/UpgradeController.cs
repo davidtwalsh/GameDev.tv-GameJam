@@ -15,6 +15,8 @@ public class UpgradeController : MonoBehaviour
     private int upgradeWallCost;
     [SerializeField]
     private int upgradeWizardCost;
+    [SerializeField]
+    private int upgradeCrossbowManCost;
 
     [Header("Upgrade Improvements")]
     [SerializeField]
@@ -23,6 +25,8 @@ public class UpgradeController : MonoBehaviour
     private int upgradedWallMaxHPIncrease;
     [SerializeField]
     private float upgradedWizardExtraPolymorphTime;
+    [SerializeField]
+    private int upgradedCrossbowManExtraAttack;
 
     [Header("Upgrade Sprites")]
     [SerializeField]
@@ -31,6 +35,8 @@ public class UpgradeController : MonoBehaviour
     private Sprite upgradedWallSprite;
     [SerializeField]
     private Sprite upgradedWizardSprite;
+    [SerializeField]
+    private Sprite upgradedCrossbowManSprite;
 
     [Header("UI")]
     [SerializeField]
@@ -54,9 +60,17 @@ public class UpgradeController : MonoBehaviour
     [SerializeField]
     private Image placeWizardImage;
 
+    [SerializeField]
+    private TextMeshProUGUI upgradeCrossbowManCostText;
+    [SerializeField]
+    private GameObject upgradeCrossbowManButton;
+    [SerializeField]
+    private Image placeCrossbowManImage;
+
     private bool upgradedArcher = false;
     private bool upgradedWall = false;
     private bool upgradedWizard = false;
+    private bool upgradedCrossbowMan = false;
 
 
     void Awake()
@@ -78,6 +92,7 @@ public class UpgradeController : MonoBehaviour
         upgradeArcherCostText.text = upgradeArcherCost.ToString();
         upgradeWizardCostText.text = upgradeWizardCost.ToString();
         upgradeWallCostText.text = upgradeWallCost.ToString();
+        upgradeCrossbowManCostText.text = upgradeCrossbowManCost.ToString();
     }
 
     public void UpgradeArchers()
@@ -116,6 +131,18 @@ public class UpgradeController : MonoBehaviour
         }
     }
 
+    public void UpgradeCrossbowMen()
+    {
+        if (ResourceController.Instance.CanSpendCoins(upgradeCrossbowManCost) == true)
+        {
+            upgradedCrossbowMan = true;
+            ResourceController.Instance.SpendCoins(upgradeCrossbowManCost);
+            UpdateAllCurrentCrossbowMen();
+            upgradeCrossbowManButton.SetActive(false);
+            placeCrossbowManImage.sprite = upgradedCrossbowManSprite;
+        }
+    }
+
     private void UpdateAllCurrentArchers()
     {
         List<GameObject> playerObjects = ObjectPlacer.Instance.GetPlayerAttackables();
@@ -125,6 +152,19 @@ public class UpgradeController : MonoBehaviour
             if (archer != null)
             {
                 UpgradeArcher(archer);
+            }
+        }
+    }
+
+    private void UpdateAllCurrentCrossbowMen()
+    {
+        List<GameObject> playerObjects = ObjectPlacer.Instance.GetPlayerAttackables();
+        foreach (GameObject playerObject in playerObjects)
+        {
+            CrossbowAttacker crossbowMan = playerObject.GetComponent<CrossbowAttacker>();
+            if (crossbowMan != null)
+            {
+                UpgradeCrossbowMan(crossbowMan);
             }
         }
     }
@@ -176,6 +216,16 @@ public class UpgradeController : MonoBehaviour
         }
     }
 
+    public void UpgradeCrossbowMan(CrossbowAttacker crossbowMan)
+    {
+        crossbowMan.SetUpgradedAttackDamage(upgradedCrossbowManExtraAttack);
+        SpriteRenderer spr = crossbowMan.GetComponent<SpriteRenderer>();
+        if (spr != null)
+        {
+            spr.sprite = upgradedCrossbowManSprite;
+        }
+    }
+
     public void UpgradeWizard(WizardAttacker wizard)
     {
         wizard.SetUpgradedPolymorphTime(upgradedWizardExtraPolymorphTime);
@@ -200,5 +250,10 @@ public class UpgradeController : MonoBehaviour
     public bool HasUpgradedWizard()
     {
         return upgradedWizard;
+    }
+
+    public bool HasUpgradedCrossbowMan()
+    {
+        return upgradedCrossbowMan;
     }
 }
