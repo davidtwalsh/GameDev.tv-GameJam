@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class UnitPlaceable : MonoBehaviour, Placeable
@@ -14,9 +15,17 @@ public class UnitPlaceable : MonoBehaviour, Placeable
     [SerializeField]
     private int cost;
 
-    void Start()
+    [SerializeField]
+    private TextMeshProUGUI costText;
+
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+    void Start()
+    {
+        costText.text = cost.ToString();
+        gameObject.SetActive(false);
     }
 
     public bool IsPlaceable(Vector3 worldPosition)
@@ -49,6 +58,12 @@ public class UnitPlaceable : MonoBehaviour, Placeable
         {
             UpgradeController.Instance.UpgradeArcher(archer);
         }
+        WizardAttacker wizard = newObj.GetComponent<WizardAttacker>();
+        if (wizard != null && UpgradeController.Instance.HasUpgradedWizard() == true)
+        {
+            UpgradeController.Instance.UpgradeWizard(wizard);
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

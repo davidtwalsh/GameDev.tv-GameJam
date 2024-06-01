@@ -13,18 +13,24 @@ public class UpgradeController : MonoBehaviour
     private int upgradeArcherCost;
     [SerializeField]
     private int upgradeWallCost;
+    [SerializeField]
+    private int upgradeWizardCost;
 
     [Header("Upgrade Improvements")]
     [SerializeField]
     private float upgradedArcherAttackTime;
     [SerializeField]
     private int upgradedWallMaxHPIncrease;
+    [SerializeField]
+    private float upgradedWizardExtraPolymorphTime;
 
     [Header("Upgrade Sprites")]
     [SerializeField]
     private Sprite upgradedArcherSprite;
     [SerializeField]
     private Sprite upgradedWallSprite;
+    [SerializeField]
+    private Sprite upgradedWizardSprite;
 
     [Header("UI")]
     [SerializeField]
@@ -33,6 +39,7 @@ public class UpgradeController : MonoBehaviour
     private GameObject upgradeArcherButton;
     [SerializeField]
     private Image placeArcherImage;
+
     [SerializeField]
     private TextMeshProUGUI upgradeWallCostText;
     [SerializeField]
@@ -40,8 +47,16 @@ public class UpgradeController : MonoBehaviour
     [SerializeField]
     private Image placeWallImage;
 
+    [SerializeField]
+    private TextMeshProUGUI upgradeWizardCostText;
+    [SerializeField]
+    private GameObject upgradeWizardButton;
+    [SerializeField]
+    private Image placeWizardImage;
+
     private bool upgradedArcher = false;
     private bool upgradedWall = false;
+    private bool upgradedWizard = false;
 
 
     void Awake()
@@ -61,6 +76,8 @@ public class UpgradeController : MonoBehaviour
     private void Start()
     {
         upgradeArcherCostText.text = upgradeArcherCost.ToString();
+        upgradeWizardCostText.text = upgradeWizardCost.ToString();
+        upgradeWallCostText.text = upgradeWallCost.ToString();
     }
 
     public void UpgradeArchers()
@@ -87,6 +104,18 @@ public class UpgradeController : MonoBehaviour
         }
     }
 
+    public void UpgradeWizards()
+    {
+        if (ResourceController.Instance.CanSpendCoins(upgradeWizardCost) == true)
+        {
+            upgradedWizard = true;
+            ResourceController.Instance.SpendCoins(upgradeWizardCost);
+            UpdateAllCurrentWizards();
+            upgradeWizardButton.SetActive(false);
+            placeWizardImage.sprite = upgradedWizardSprite;
+        }
+    }
+
     private void UpdateAllCurrentArchers()
     {
         List<GameObject> playerObjects = ObjectPlacer.Instance.GetPlayerAttackables();
@@ -96,6 +125,19 @@ public class UpgradeController : MonoBehaviour
             if (archer != null)
             {
                 UpgradeArcher(archer);
+            }
+        }
+    }
+
+    private void UpdateAllCurrentWizards()
+    {
+        List<GameObject> playerObjects = ObjectPlacer.Instance.GetPlayerAttackables();
+        foreach (GameObject playerObject in playerObjects)
+        {
+            WizardAttacker wizard = playerObject.GetComponent<WizardAttacker>();
+            if (wizard != null)
+            {
+                UpgradeWizard(wizard);
             }
         }
     }
@@ -130,7 +172,17 @@ public class UpgradeController : MonoBehaviour
         SpriteRenderer spr = archer.GetComponent<SpriteRenderer>();
         if (spr != null)
         {
-            archer.GetComponent<SpriteRenderer>().sprite = upgradedArcherSprite;
+            spr.sprite = upgradedArcherSprite;
+        }
+    }
+
+    public void UpgradeWizard(WizardAttacker wizard)
+    {
+        wizard.SetUpgradedPolymorphTime(upgradedWizardExtraPolymorphTime);
+        SpriteRenderer spr = wizard.GetComponent<SpriteRenderer>();
+        if (spr != null)
+        {
+            spr.sprite = upgradedWizardSprite;
         }
     }
 
@@ -143,5 +195,10 @@ public class UpgradeController : MonoBehaviour
     public bool HasUpgradedWalls()
     {
         return upgradedWall;
+    }
+
+    public bool HasUpgradedWizard()
+    {
+        return upgradedWizard;
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class StructurePlaceable : MonoBehaviour, Placeable
@@ -14,9 +15,18 @@ public class StructurePlaceable : MonoBehaviour, Placeable
     [SerializeField]
     private int cost;
 
-    void Start()
+    [SerializeField]
+    TextMeshProUGUI costText;
+
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    void Start()
+    {
+        costText.text = cost.ToString(); 
+        gameObject.SetActive(false);
     }
 
     public bool IsPlaceable(Vector3 worldPosition)

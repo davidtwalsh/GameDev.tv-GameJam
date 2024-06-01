@@ -87,9 +87,9 @@ public class WizardAttacker : MonoBehaviour, IAttacker
         return attack;
     }
 
-    public void SetUpgradedAttackTime(float newAttackTime)
+    public void SetUpgradedPolymorphTime(float upgradedWizardPolymorphTime)
     {
-        attackTime = newAttackTime;
+        attack.UpgradePolymorphTime(upgradedWizardPolymorphTime);
     }
 
     public GameObject GetAttackTarget(float attackRange)
