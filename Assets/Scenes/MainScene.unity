@@ -4580,6 +4580,8 @@ MonoBehaviour:
     monsters:
     - monsterPrefab: {fileID: 822074976399740299, guid: 9b7177bd02e5e244babc9c0a872e7c00, type: 3}
       monsterCount: 10
+    - monsterPrefab: {fileID: 2674758866370854402, guid: 9c522db98abd8444098448e4a243916c, type: 3}
+      monsterCount: 2
 --- !u!4 &1871857940
 Transform:
   m_ObjectHideFlags: 0
