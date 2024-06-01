@@ -121,6 +121,7 @@ public class WizardAttacker : MonoBehaviour, IAttacker
         if (nonPolymorphed.Count > 0)
         {
             //Get Closest one
+            /*
             GameObject closestMonsterInRange = null;
             float minDst = 99999f;
             foreach (EntityStatus status in nonPolymorphed)
@@ -136,6 +137,9 @@ public class WizardAttacker : MonoBehaviour, IAttacker
             {
                 return closestMonsterInRange;
             }
+            */
+            int randomIndex = UnityEngine.Random.Range(0, nonPolymorphed.Count);
+            return (nonPolymorphed[randomIndex].gameObject);
         }
 
         return null;

@@ -90,6 +90,7 @@ public class ArcherAttacker : MonoBehaviour, IAttacker
 
     public GameObject GetAttackTarget(float attackRange)
     {
+        /*
         GameObject closestMonsterInRange = null;
         float minDst = 99999f;
         foreach (GameObject monster in SpawnController.Instance.GetMonsters())
@@ -101,7 +102,41 @@ public class ArcherAttacker : MonoBehaviour, IAttacker
                 minDst = dstToMonster;
             }
         }
-        return closestMonsterInRange;
+        */
+        GameObject newTarget = null;
+        List<GameObject> monstersInRangeWithArmour = new List<GameObject>();
+        List<GameObject> monstersInRangeNoArmour = new List<GameObject>();
+
+        foreach (GameObject monster in SpawnController.Instance.GetMonsters())
+        {
+            float dstToMonster = MathHelper.CalculateDistance(transform.position.x, transform.position.y, monster.transform.position.x, monster.transform.position.y);
+            if (dstToMonster < attackRange)
+            {
+                EntityStatus status = monster.GetComponent<EntityStatus>();
+                if (status != null)
+                {
+                    if (status.IsArmoured() == true)
+                    {
+                        monstersInRangeWithArmour.Add(monster);
+                    }
+                    else
+                    {
+                        monstersInRangeNoArmour.Add(monster);
+                    }
+                }
+            }
+        }
+        if (monstersInRangeNoArmour.Count > 0)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, monstersInRangeNoArmour.Count);
+            newTarget = monstersInRangeNoArmour[randomIndex];
+        }
+       else if (monstersInRangeWithArmour.Count > 0)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, monstersInRangeWithArmour.Count);
+            newTarget = monstersInRangeWithArmour[randomIndex];
+        }
+        return newTarget;
     }
 
 }

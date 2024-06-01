@@ -188,4 +188,9 @@ public class EntityStatus : MonoBehaviour
     {
         return isPolymorphed;
     }
+
+    public bool IsArmoured()
+    {
+        return isArmoured;
+    }
 }
