@@ -9,6 +9,9 @@ public class SpawnController : MonoBehaviour
     [SerializeField]
     private GameObject goblinPrefab;
 
+    [SerializeField]
+    private GameObject trollPrefab;
+
     public static SpawnController Instance;
 
     private List<GameObject> monsters = new List<GameObject>();
@@ -47,6 +50,10 @@ public class SpawnController : MonoBehaviour
         {
             SpawnGoblin();
         }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            SpawnTroll();
+        }
 
         if (hasStarted == true)
         {
@@ -77,7 +84,19 @@ public class SpawnController : MonoBehaviour
         GameObject monster = Instantiate(goblinPrefab, spawns[randomIndex], Quaternion.identity);
         monsters.Add(monster);
     }
-    
+
+    private void SpawnTroll()
+    {
+        if (spawns == null || spawns.Count == 0)
+        {
+            return;
+        }
+        // Generate a random index within the bounds of the list
+        int randomIndex = Random.Range(0, spawns.Count);
+        GameObject monster = Instantiate(trollPrefab, spawns[randomIndex], Quaternion.identity);
+        monsters.Add(monster);
+    }
+
     private void SpawnForWave(Wave wave)
     {
         List<Vector3> spawnsCopy = new List<Vector3>();
