@@ -65,22 +65,6 @@ public class SpawnController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SpawnMonsterTest(goblinPrefab);
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            SpawnMonsterTest(trollPrefab);
-        }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            SpawnMonsterTest(armouredGoblinPrefab);
-        }
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            SpawnMonsterTest(demonPrefab);
-        }
 
         if (hasStarted == true)
         {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class Enemy : MonoBehaviour
 {
