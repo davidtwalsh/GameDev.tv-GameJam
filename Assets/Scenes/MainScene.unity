@@ -592,7 +592,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -824,7 +824,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 198.1, y: 0}
+  m_AnchoredPosition: {x: 112.100006, y: 0}
   m_SizeDelta: {x: 80, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &133461120
@@ -1026,7 +1026,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &172058618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1181,7 +1181,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -58, y: -0}
+  m_AnchoredPosition: {x: -144, y: -0}
   m_SizeDelta: {x: 80, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &220106037
@@ -2935,7 +2935,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -56, y: -0}
+  m_AnchoredPosition: {x: -142, y: -0}
   m_SizeDelta: {x: 80, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &597115696
@@ -3481,7 +3481,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &713913849
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3849,7 +3849,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 111.600006, y: 0}
+  m_AnchoredPosition: {x: 25.600006, y: 0}
   m_SizeDelta: {x: 80, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &798009171
@@ -3957,6 +3957,140 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 798009169}
+  m_CullTransparentMesh: 1
+--- !u!1 &848460354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 848460355}
+  - component: {fileID: 848460357}
+  - component: {fileID: 848460356}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &848460355
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848460354}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1996652173}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.000030517578, y: 0}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 1, y: 1}
+--- !u!114 &848460356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848460354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: WaveTimer
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 20
+  m_fontSizeBase: 20
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &848460357
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848460354}
   m_CullTransparentMesh: 1
 --- !u!1 &848820555
 GameObject:
@@ -5743,7 +5877,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 29.100037, y: 0}
+  m_AnchoredPosition: {x: -56.899963, y: 0}
   m_SizeDelta: {x: 80, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1377685695
@@ -6850,7 +6984,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 26.50003, y: -0.000017404556}
+  m_AnchoredPosition: {x: -59.49997, y: -0.000017404556}
   m_SizeDelta: {x: 80, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1638540463
@@ -7167,7 +7301,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 113.80002, y: 0}
+  m_AnchoredPosition: {x: 27.800018, y: 0}
   m_SizeDelta: {x: 80, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1668201354
@@ -8378,17 +8512,55 @@ MonoBehaviour:
   - waveTime: 2
     monsters:
     - monsterPrefab: {fileID: 822074976399740299, guid: 9b7177bd02e5e244babc9c0a872e7c00, type: 3}
-      monsterCount: 5
+      monsterCount: 3
   - waveTime: 10
     monsters:
     - monsterPrefab: {fileID: 822074976399740299, guid: 9b7177bd02e5e244babc9c0a872e7c00, type: 3}
-      monsterCount: 5
+      monsterCount: 4
   - waveTime: 20
     monsters:
     - monsterPrefab: {fileID: 822074976399740299, guid: 9b7177bd02e5e244babc9c0a872e7c00, type: 3}
       monsterCount: 5
+  - waveTime: 45
+    monsters:
+    - monsterPrefab: {fileID: 822074976399740299, guid: 9b7177bd02e5e244babc9c0a872e7c00, type: 3}
+      monsterCount: 5
+    - monsterPrefab: {fileID: 2674758866370854402, guid: 9c522db98abd8444098448e4a243916c, type: 3}
+      monsterCount: 1
+  - waveTime: 60
+    monsters:
+    - monsterPrefab: {fileID: 822074976399740299, guid: 9b7177bd02e5e244babc9c0a872e7c00, type: 3}
+      monsterCount: 10
+  - waveTime: 120
+    monsters:
+    - monsterPrefab: {fileID: 822074976399740299, guid: 9b7177bd02e5e244babc9c0a872e7c00, type: 3}
+      monsterCount: 5
+    - monsterPrefab: {fileID: 8882211879484378211, guid: 2835243c1f8c750409785cb76e8b66bd, type: 3}
+      monsterCount: 5
+    - monsterPrefab: {fileID: 2674758866370854402, guid: 9c522db98abd8444098448e4a243916c, type: 3}
+      monsterCount: 3
+  - waveTime: 150
+    monsters:
+    - monsterPrefab: {fileID: 822074976399740299, guid: 9b7177bd02e5e244babc9c0a872e7c00, type: 3}
+      monsterCount: 8
+    - monsterPrefab: {fileID: 8882211879484378211, guid: 2835243c1f8c750409785cb76e8b66bd, type: 3}
+      monsterCount: 8
+    - monsterPrefab: {fileID: 2674758866370854402, guid: 9c522db98abd8444098448e4a243916c, type: 3}
+      monsterCount: 6
+  - waveTime: 230
+    monsters:
+    - monsterPrefab: {fileID: 822074976399740299, guid: 9b7177bd02e5e244babc9c0a872e7c00, type: 3}
+      monsterCount: 5
+    - monsterPrefab: {fileID: 8882211879484378211, guid: 2835243c1f8c750409785cb76e8b66bd, type: 3}
+      monsterCount: 20
+    - monsterPrefab: {fileID: 2674758866370854402, guid: 9c522db98abd8444098448e4a243916c, type: 3}
+      monsterCount: 10
+    - monsterPrefab: {fileID: 3151039288206710167, guid: 00fef592ca7cf9d4cb0d9e7e2fccbfbb, type: 3}
+      monsterCount: 5
+  secondsLeft: 300
   timerTextMesh: {fileID: 1468155936}
   timerPanel: {fileID: 480654292}
+  waveTimerText: {fileID: 848460356}
 --- !u!4 &1871857940
 Transform:
   m_ObjectHideFlags: 0
@@ -8811,7 +8983,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 197.90002, y: 0}
+  m_AnchoredPosition: {x: 111.900024, y: 0}
   m_SizeDelta: {x: 80, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1956590913
@@ -8953,17 +9125,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37577a1a67755584da1088e21c35f2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeArcherCost: 120
-  upgradeWallCost: 80
-  upgradeWizardCost: 150
-  upgradeCrossbowManCost: 200
-  upgradeFairyCost: 100
-  upgradeTowerCost: 110
+  upgradeArcherCost: 30
+  upgradeWallCost: 40
+  upgradeWizardCost: 50
+  upgradeCrossbowManCost: 60
+  upgradeFairyCost: 20
+  upgradeTowerCost: 40
   upgradedArcherAttackTime: 1
-  upgradedWallMaxHPIncrease: 100
+  upgradedWallMaxHPIncrease: 200
   upgradedWizardExtraPolymorphTime: 2
   upgradedCrossbowManExtraAttack: 15
-  upgradedFairySpeedIncrease: 1
+  upgradedFairySpeedIncrease: 1.5
   upgradedArcherSprite: {fileID: 21300000, guid: af67ded6df447cc42a69649cf850b7a5, type: 3}
   upgradedWallSprite: {fileID: 21300000, guid: 91855e9a8a228ea438a7225222dbe13c, type: 3}
   upgradedWizardSprite: {fileID: 21300000, guid: 644171d6ee1397d4db40a082c9dfcea7, type: 3}
@@ -9187,6 +9359,7 @@ RectTransform:
   - {fileID: 848820556}
   - {fileID: 68519854}
   - {fileID: 480654293}
+  - {fileID: 848460355}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9556,7 +9729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67d41a16a32e60c4a99257e34e906b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numCoins: 100
+  numCoins: 150
   coinAmountText: {fileID: 401235110}
   coinPrefab: {fileID: 7791552948022577032, guid: b26683bf2ca43c64c8b291c4911222d0, type: 3}
   groundCoins: []

@@ -33,12 +33,16 @@ public class SpawnController : MonoBehaviour
     [SerializeField]
     private List<Wave> waves = new List<Wave>();
 
+    [SerializeField]
     private float secondsLeft = 90f;
 
     [SerializeField]
     private TextMeshProUGUI timerTextMesh;
     [SerializeField]
     private GameObject timerPanel;
+
+    [SerializeField]
+    private TextMeshProUGUI waveTimerText;
 
     void Awake()
     {
@@ -82,6 +86,11 @@ public class SpawnController : MonoBehaviour
         {
             gameTimer += Time.deltaTime;
             checkWavesTimer += Time.deltaTime;
+
+            if (waveTimerText != null)
+            {
+                waveTimerText.text = gameTimer.ToString();
+            }
 
             if (checkWavesTimer > .3f)
             {

@@ -107,8 +107,8 @@ MonoBehaviour:
   rb: {fileID: 6618550763101521333}
   attackDistance: 1
   weaponAnimator: {fileID: 4450340481558977064}
-  coinDropMin: 0
-  coinDropMax: 2
+  coinDropMin: 1
+  coinDropMax: 4
   deathSound: {fileID: 8300000, guid: d6e50017a934d374386fdce5493809d5, type: 3}
 --- !u!50 &6618550763101521333
 Rigidbody2D:

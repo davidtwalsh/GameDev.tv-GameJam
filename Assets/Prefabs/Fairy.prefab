@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42cd6bb27a3fe2b43bae4ba763aed21b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 2
   normalSpriteColor: {r: 1, g: 1, b: 1, a: 1}
   damageSpriteColor: {r: 1, g: 0.739583, b: 0, a: 1}
 --- !u!50 &4343091750461882644
@@ -177,7 +177,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9654f5ee317105b43b59d55732d8c31c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0

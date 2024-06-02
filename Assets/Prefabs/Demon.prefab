@@ -107,7 +107,7 @@ MonoBehaviour:
   rb: {fileID: 6534963138330420508}
   attackDistance: 1.25
   weaponAnimator: {fileID: 8774741953216585965}
-  coinDropMin: 6
+  coinDropMin: 5
   coinDropMax: 10
   deathSound: {fileID: 8300000, guid: 6ccf71a7b6242044ca788e2502401321, type: 3}
 --- !u!50 &6534963138330420508
@@ -428,7 +428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponUser: {fileID: 7013514400423739747}
   damageAttack:
-    damage: 50
+    damage: 100
     isPiercing: 0
 --- !u!82 &7950134582324334826
 AudioSource:
