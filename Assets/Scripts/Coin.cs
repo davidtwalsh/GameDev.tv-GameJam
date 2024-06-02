@@ -14,6 +14,8 @@ public class Coin : MonoBehaviour
     private float xDirection;
     private float yEnd;
 
+    private bool hasSeeker = false;
+
 
     private void Awake()
     {
@@ -58,5 +60,15 @@ public class Coin : MonoBehaviour
         float second = b * x;
         float third = c;
         return first + second + third;
+    }
+
+    public bool HasSeeker()
+    {
+        return hasSeeker;
+    }
+
+    public void SetSeeker()
+    {
+        hasSeeker = true;
     }
 }

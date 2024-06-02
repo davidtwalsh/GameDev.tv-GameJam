@@ -252,7 +252,12 @@ public class Enemy : MonoBehaviour
         int coinsToDrop = Random.Range(coinDropMin, coinDropMax+1);
         for (int i = 0; i < coinsToDrop; i++)
         {
-            GameObject coin = Instantiate(ResourceController.Instance.GetCoinPrefab(),transform.position,Quaternion.identity);
+            GameObject coinObj = Instantiate(ResourceController.Instance.GetCoinPrefab(),transform.position,Quaternion.identity);
+            Coin coin = coinObj.GetComponent<Coin>();
+            if (coin != null)
+            {
+                ResourceController.Instance.GetGroundCoins().Add(coin);
+            }
         }
     }
 }

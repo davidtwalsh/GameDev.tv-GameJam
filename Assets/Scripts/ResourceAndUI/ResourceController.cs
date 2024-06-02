@@ -16,6 +16,9 @@ public class ResourceController : MonoBehaviour
     [SerializeField]
     private GameObject coinPrefab;
 
+    [SerializeField]
+    private List<Coin> groundCoins = new List<Coin>();
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -57,6 +60,16 @@ public class ResourceController : MonoBehaviour
     public GameObject GetCoinPrefab()
     {
         return coinPrefab;
+    }
+
+    public List<Coin> GetGroundCoins()
+    { 
+        return groundCoins;
+    }
+
+    public void AddCoin()
+    {
+        numCoins++;
     }
 
 }

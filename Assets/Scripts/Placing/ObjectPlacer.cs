@@ -21,6 +21,8 @@ public class ObjectPlacer : MonoBehaviour
     private GameObject crossbowManPlacerGhost;
     [SerializeField]
     private GameObject towerPlacerGhost;
+    [SerializeField]
+    private GameObject fairyPlacerGhost;
 
     private bool placingObject = false;
     private bool canPlaceObject = false;
@@ -173,6 +175,12 @@ public class ObjectPlacer : MonoBehaviour
     {
         CleanUpOldGhost();
         SetUpNewGhost(towerPlacerGhost);
+    }
+
+    public void SetPlacingFairy()
+    {
+        CleanUpOldGhost();
+        SetUpNewGhost(fairyPlacerGhost);
     }
 
     bool IsPointerOverUIObject()
