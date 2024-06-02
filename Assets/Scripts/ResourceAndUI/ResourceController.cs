@@ -13,6 +13,9 @@ public class ResourceController : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI coinAmountText;
 
+    [SerializeField]
+    private GameObject coinPrefab;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -50,4 +53,10 @@ public class ResourceController : MonoBehaviour
         }
         return true;
     }
+
+    public GameObject GetCoinPrefab()
+    {
+        return coinPrefab;
+    }
+
 }

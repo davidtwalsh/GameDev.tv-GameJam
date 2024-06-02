@@ -30,6 +30,11 @@ public class Enemy : MonoBehaviour
     Vector2 wanderTarget;
     private float newWanderTargetTimer = 0f;
 
+    [SerializeField]
+    private int coinDropMin;
+    [SerializeField]
+    private int coinDropMax;
+
 
     private void Awake()
     {
@@ -240,6 +245,15 @@ public class Enemy : MonoBehaviour
     public void SetOriginalSprite()
     {
         spriteRenderer.sprite = originalSprite;
+    }
+
+    public void DropCoins()
+    {
+        int coinsToDrop = Random.Range(coinDropMin, coinDropMax+1);
+        for (int i = 0; i < coinsToDrop; i++)
+        {
+            GameObject coin = Instantiate(ResourceController.Instance.GetCoinPrefab(),transform.position,Quaternion.identity);
+        }
     }
 }
 

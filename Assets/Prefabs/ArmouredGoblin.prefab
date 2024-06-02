@@ -229,6 +229,8 @@ MonoBehaviour:
   rb: {fileID: 4635586102137634403}
   attackDistance: 1
   weaponAnimator: {fileID: 8697112116006103265}
+  coinDropMin: 1
+  coinDropMax: 3
 --- !u!50 &4635586102137634403
 Rigidbody2D:
   serializedVersion: 4
@@ -328,6 +330,18 @@ MonoBehaviour:
       - m_Target: {fileID: 3840926529364462182}
         m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
         m_MethodName: SetOriginalSprite
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3840926529364462182}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: DropCoins
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

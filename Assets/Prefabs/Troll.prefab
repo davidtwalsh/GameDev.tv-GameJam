@@ -106,6 +106,8 @@ MonoBehaviour:
   rb: {fileID: 132806631743502661}
   attackDistance: 1
   weaponAnimator: {fileID: 1839994510861849353}
+  coinDropMin: 3
+  coinDropMax: 7
 --- !u!50 &132806631743502661
 Rigidbody2D:
   serializedVersion: 4
@@ -214,6 +216,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7229947627278956183}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: DropCoins
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  isArmoured: 0
 --- !u!1 &9009226090540909687
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +330,7 @@ MonoBehaviour:
   weaponUser: {fileID: 7229947627278956183}
   damageAttack:
     damage: 50
+    isPiercing: 0
 --- !u!95 &1839994510861849353
 Animator:
   serializedVersion: 5
