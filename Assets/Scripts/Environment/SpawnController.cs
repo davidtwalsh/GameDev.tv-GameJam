@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SpawnController : MonoBehaviour
@@ -15,6 +16,10 @@ public class SpawnController : MonoBehaviour
     [SerializeField]
     private GameObject armouredGoblinPrefab;
 
+    [SerializeField]
+    private GameObject demonPrefab;
+
+
     public static SpawnController Instance;
 
     private List<GameObject> monsters = new List<GameObject>();
@@ -27,6 +32,13 @@ public class SpawnController : MonoBehaviour
 
     [SerializeField]
     private List<Wave> waves = new List<Wave>();
+
+    private float secondsLeft = 90f;
+
+    [SerializeField]
+    private TextMeshProUGUI timerTextMesh;
+    [SerializeField]
+    private GameObject timerPanel;
 
     void Awake()
     {
@@ -61,6 +73,10 @@ public class SpawnController : MonoBehaviour
         {
             SpawnMonsterTest(armouredGoblinPrefab);
         }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            SpawnMonsterTest(demonPrefab);
+        }
 
         if (hasStarted == true)
         {
@@ -76,6 +92,16 @@ public class SpawnController : MonoBehaviour
                     waves.Remove(wave);
                 }
                 checkWavesTimer = 0f;
+            }
+
+
+            secondsLeft -= Time.deltaTime;
+            string timeLeftString = ConvertSecondsToMinutesAndSeconds(secondsLeft);
+            timerTextMesh.text = timeLeftString;
+            if (secondsLeft <= 0)
+            {
+                WinConditionController.Instance.WonGame();
+                timerPanel.SetActive(false);
             }
         }
     }
@@ -141,6 +167,7 @@ public class SpawnController : MonoBehaviour
     public void StartGame()
     {
         hasStarted = true;
+        timerPanel.SetActive(true);
     }
 
     public Wave GetWaveForTime(int time)
@@ -153,6 +180,16 @@ public class SpawnController : MonoBehaviour
             }
         }
         return null;
+    }
+
+    private string ConvertSecondsToMinutesAndSeconds(float totalSeconds)
+    {
+        // Calculate minutes and seconds
+        int minutes = Mathf.FloorToInt(totalSeconds / 60);
+        int seconds = Mathf.FloorToInt(totalSeconds % 60);
+
+        // Return the result as a string
+        return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }
 

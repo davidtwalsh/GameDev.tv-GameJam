@@ -9,6 +9,12 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     private DamageAttack damageAttack;
 
+    private AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     public void AttackEvent()
     {
@@ -19,6 +25,10 @@ public class Weapon : MonoBehaviour
             if (status != null)
             {
                 damageAttack.AffectTarget(status);
+                if (audioSource != null && audioSource.clip != null)
+                {
+                    audioSource.Play();
+                }
             }
         }
 

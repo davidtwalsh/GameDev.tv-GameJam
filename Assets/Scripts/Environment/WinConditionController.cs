@@ -26,14 +26,6 @@ public class WinConditionController : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            WonGame();
-        }
-    }
-
     public void LostGame()
     {
         StartCoroutine(LostGameCoroutine());

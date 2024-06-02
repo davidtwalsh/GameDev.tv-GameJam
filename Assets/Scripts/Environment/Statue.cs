@@ -30,6 +30,7 @@ public class Statue : MonoBehaviour
 
     public void StatueDestroyed()
     {
+        AudioSourceSingleton.Instance.PlayStructureDestroyed();
         WinConditionController.Instance.LostGame();
     }
 

@@ -42,6 +42,7 @@ public class ObjectPlacer : MonoBehaviour
 
     private List<GameObject> fairies = new List<GameObject>();
 
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -109,6 +110,10 @@ public class ObjectPlacer : MonoBehaviour
             {
                 activePlaceable.Place(worldPosition);
                 ResourceController.Instance.SpendCoins(activePlaceable.GetCost());
+                if (fairies.Count > 0)
+                {
+                    fairyPlacerGhost.GetComponent<UnitPlaceable>().SetCost(10);
+                }
             }
         }
     }

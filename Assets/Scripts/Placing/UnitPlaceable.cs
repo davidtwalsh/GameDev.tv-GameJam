@@ -26,10 +26,18 @@ public class UnitPlaceable : MonoBehaviour, Placeable
 
     AudioSource audioSource;
 
+    [SerializeField]
+    private bool isFairyPlacer = false;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+
+        if (isFairyPlacer == true)
+        {
+            cost = 0;
+        }
     }
     void Start()
     {
@@ -97,7 +105,6 @@ public class UnitPlaceable : MonoBehaviour, Placeable
             UpgradeController.Instance.UpgradeFairy(fairy);
         }
 
-
         if (isOverTower == true)
         {
             bool placedUnitInTower = false;
@@ -144,6 +151,33 @@ public class UnitPlaceable : MonoBehaviour, Placeable
             }
 
         }
+
+        if (isOverTower == true)
+        {
+            List<Wall> wallsToRemove = new List<Wall>();
+            Statue statue = null;
+            foreach (GameObject collider in colliders)
+            {
+                Wall wall = collider.GetComponent<Wall>();
+                if (wall != null)
+                {
+                    wallsToRemove.Add(wall);
+                }
+                Statue stat = collider.GetComponent<Statue>();
+                if (stat != null)
+                {
+                    statue = stat;
+                }
+            }
+            foreach (Wall wall in wallsToRemove)
+            {
+                colliders.Remove(wall.gameObject);
+            }
+            if (statue != null)
+            {
+                colliders.Remove(statue.gameObject);
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -167,6 +201,12 @@ public class UnitPlaceable : MonoBehaviour, Placeable
             isOverTower = false;
             tower = null;
         }
+    }
+
+    public void SetCost(int newCost)
+    {
+        cost = newCost;
+        costText.text = cost.ToString();
     }
     public int GetCost()
     {

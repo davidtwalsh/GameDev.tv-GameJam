@@ -20,10 +20,18 @@ public class Fairy : MonoBehaviour
 
     private AudioSource audioSource;
 
+    [SerializeField]
+    private Color normalSpriteColor;
+    [SerializeField]
+    private Color damageSpriteColor;
+
+    SpriteRenderer spriteRenderer;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -90,7 +98,15 @@ public class Fairy : MonoBehaviour
         ResourceController.Instance.GetGroundCoins().Remove(seekingCoin);
         Destroy(seekingCoin.gameObject);
         audioSource.Play();
+        StartCoroutine(FlashSprite());
 
+    }
+
+    IEnumerator FlashSprite()
+    {
+        spriteRenderer.color = damageSpriteColor;
+        yield return new WaitForSeconds(.1f);
+        spriteRenderer.color = normalSpriteColor;
     }
 
     private Coin CheckCoins()

@@ -112,6 +112,13 @@ public class EntityStatus : MonoBehaviour
         {
             onDeathEvent.Invoke();
 
+            Wall wall = GetComponent<Wall>();
+            Tower tower = GetComponent<Tower>();
+            if (wall != null || tower != null)
+            {
+                AudioSourceSingleton.Instance.PlayStructureDestroyed();
+            }
+
             if (SpawnController.Instance.GetMonsters().Contains(gameObject))
             {
                 SpawnController.Instance.GetMonsters().Remove(gameObject);
