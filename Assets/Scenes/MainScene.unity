@@ -8547,17 +8547,49 @@ MonoBehaviour:
       monsterCount: 8
     - monsterPrefab: {fileID: 2674758866370854402, guid: 9c522db98abd8444098448e4a243916c, type: 3}
       monsterCount: 6
-  - waveTime: 230
+  - waveTime: 210
     monsters:
     - monsterPrefab: {fileID: 822074976399740299, guid: 9b7177bd02e5e244babc9c0a872e7c00, type: 3}
-      monsterCount: 5
+      monsterCount: 15
+    - monsterPrefab: {fileID: 3151039288206710167, guid: 00fef592ca7cf9d4cb0d9e7e2fccbfbb, type: 3}
+      monsterCount: 2
+  - waveTime: 250
+    monsters:
+    - monsterPrefab: {fileID: 2674758866370854402, guid: 9c522db98abd8444098448e4a243916c, type: 3}
+      monsterCount: 18
+  - waveTime: 300
+    monsters:
+    - monsterPrefab: {fileID: 822074976399740299, guid: 9b7177bd02e5e244babc9c0a872e7c00, type: 3}
+      monsterCount: 25
+    - monsterPrefab: {fileID: 8882211879484378211, guid: 2835243c1f8c750409785cb76e8b66bd, type: 3}
+      monsterCount: 25
+  - waveTime: 310
+    monsters:
+    - monsterPrefab: {fileID: 822074976399740299, guid: 9b7177bd02e5e244babc9c0a872e7c00, type: 3}
+      monsterCount: 15
+    - monsterPrefab: {fileID: 8882211879484378211, guid: 2835243c1f8c750409785cb76e8b66bd, type: 3}
+      monsterCount: 15
+  - waveTime: 380
+    monsters:
+    - monsterPrefab: {fileID: 822074976399740299, guid: 9b7177bd02e5e244babc9c0a872e7c00, type: 3}
+      monsterCount: 20
     - monsterPrefab: {fileID: 8882211879484378211, guid: 2835243c1f8c750409785cb76e8b66bd, type: 3}
       monsterCount: 20
-    - monsterPrefab: {fileID: 2674758866370854402, guid: 9c522db98abd8444098448e4a243916c, type: 3}
-      monsterCount: 10
+  - waveTime: 385
+    monsters:
     - monsterPrefab: {fileID: 3151039288206710167, guid: 00fef592ca7cf9d4cb0d9e7e2fccbfbb, type: 3}
       monsterCount: 5
-  secondsLeft: 300
+  - waveTime: 410
+    monsters:
+    - monsterPrefab: {fileID: 3151039288206710167, guid: 00fef592ca7cf9d4cb0d9e7e2fccbfbb, type: 3}
+      monsterCount: 5
+    - monsterPrefab: {fileID: 2674758866370854402, guid: 9c522db98abd8444098448e4a243916c, type: 3}
+      monsterCount: 5
+    - monsterPrefab: {fileID: 822074976399740299, guid: 9b7177bd02e5e244babc9c0a872e7c00, type: 3}
+      monsterCount: 25
+    - monsterPrefab: {fileID: 8882211879484378211, guid: 2835243c1f8c750409785cb76e8b66bd, type: 3}
+      monsterCount: 25
+  secondsLeft: 420
   timerTextMesh: {fileID: 1468155936}
   timerPanel: {fileID: 480654292}
   waveTimerText: {fileID: 848460356}
@@ -9125,11 +9157,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37577a1a67755584da1088e21c35f2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeArcherCost: 30
+  upgradeArcherCost: 20
   upgradeWallCost: 40
-  upgradeWizardCost: 50
-  upgradeCrossbowManCost: 60
-  upgradeFairyCost: 20
+  upgradeWizardCost: 20
+  upgradeCrossbowManCost: 30
+  upgradeFairyCost: 10
   upgradeTowerCost: 40
   upgradedArcherAttackTime: 1
   upgradedWallMaxHPIncrease: 200
@@ -9609,6 +9641,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 08c9de0083cc47d44b10f28a3c2bf5bc, type: 3}
+    - target: {fileID: 3364992344653699620, guid: d6f090ea740d09d47b90352bc378d296, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4328317027465050382, guid: d6f090ea740d09d47b90352bc378d296, type: 3}
       propertyPath: cost
       value: 10

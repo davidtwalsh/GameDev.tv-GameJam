@@ -85,6 +85,7 @@ public class Fairy : MonoBehaviour
                 {
                     PickUpCoin();
                     state = FairyState.Wandering;
+                    coinCheckTimer = 100f;
                     break;
                 }
                 break;
