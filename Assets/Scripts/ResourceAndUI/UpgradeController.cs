@@ -19,6 +19,8 @@ public class UpgradeController : MonoBehaviour
     private int upgradeCrossbowManCost;
     [SerializeField]
     private int upgradeFairyCost;
+    [SerializeField]
+    private int upgradeTowerCost;
 
     [Header("Upgrade Improvements")]
     [SerializeField]
@@ -43,6 +45,8 @@ public class UpgradeController : MonoBehaviour
     private Sprite upgradedCrossbowManSprite;
     [SerializeField]
     private Sprite upgradedFairySprite;
+    [SerializeField]
+    private Sprite upgradedTowerSprite;
 
     [Header("UI")]
     [SerializeField]
@@ -80,14 +84,25 @@ public class UpgradeController : MonoBehaviour
     [SerializeField]
     private Image placeFairyImage;
 
+    [SerializeField]
+    private TextMeshProUGUI upgradeTowerCostText;
+    [SerializeField]
+    private GameObject upgradeTowerButton;
+    [SerializeField]
+    private Image placeTowerImage;
+
     private bool upgradedArcher = false;
     private bool upgradedWall = false;
     private bool upgradedWizard = false;
     private bool upgradedCrossbowMan = false;
     private bool upgradedFairy = false;
+    private bool upgradedTower = false;
 
     [SerializeField]
     private float towerRangeBonus = 3f;
+
+    [SerializeField]
+    private float upgradedTowerExtraRangeBonus = 3f;
 
 
     void Awake()
@@ -111,6 +126,7 @@ public class UpgradeController : MonoBehaviour
         upgradeWallCostText.text = upgradeWallCost.ToString();
         upgradeCrossbowManCostText.text = upgradeCrossbowManCost.ToString();
         upgradeFairyCostText.text = upgradeFairyCost.ToString();
+        upgradeTowerCostText.text = upgradeTowerCost.ToString();
     }
 
     public void UpgradeArchers()
@@ -134,6 +150,18 @@ public class UpgradeController : MonoBehaviour
             UpdateAllCurrentWalls();
             upgradeWallButton.SetActive(false);
             placeWallImage.sprite = upgradedWallSprite;
+        }
+    }
+
+    public void UpgradeTower()
+    {
+        if (ResourceController.Instance.CanSpendCoins(upgradeTowerCost) == true)
+        {
+            upgradedTower = true;
+            ResourceController.Instance.SpendCoins(upgradeTowerCost);
+            UpdateAllCurrentTowers();
+            upgradeTowerButton.SetActive(false);
+            placeTowerImage.sprite = upgradedTowerSprite;
         }
     }
 
@@ -260,12 +288,17 @@ public class UpgradeController : MonoBehaviour
                 UpgradeWall(wall);
             }
         }
-        foreach (GameObject towerUnit in ObjectPlacer.Instance.GetToweredUnits())
+    }
+
+    private void UpdateAllCurrentTowers()
+    {
+        List<GameObject> playerObjects = ObjectPlacer.Instance.GetPlayerAttackables();
+        foreach (GameObject playerObject in playerObjects)
         {
-            Wall wall = towerUnit.GetComponent<Wall>();
-            if (wall != null)
+            Tower tower = playerObject.GetComponent<Tower>();
+            if (tower != null)
             {
-                UpgradeWall(wall);
+                UpgradeTower(tower);
             }
         }
     }
@@ -279,6 +312,11 @@ public class UpgradeController : MonoBehaviour
         {
             status.AddHP(upgradedWallMaxHPIncrease);
         }
+    }
+
+    public void UpgradeTower(Tower tower)
+    {
+        tower.UpgradeTower();
     }
 
     public void UpgradeArcher(ArcherAttacker archer)
@@ -347,8 +385,18 @@ public class UpgradeController : MonoBehaviour
         return upgradedFairy;
     }
 
+    public bool hasUpgradedTower()
+    {
+        return upgradedTower;
+    }
+
     public float GetTowerRangeBonus()
     {
-        return towerRangeBonus;
+        float result = towerRangeBonus;
+        if (upgradedTower == true)
+        {
+            result += upgradedTowerExtraRangeBonus;
+        }
+        return result;
     }
 }

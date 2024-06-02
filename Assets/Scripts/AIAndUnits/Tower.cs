@@ -9,6 +9,20 @@ public class Tower : MonoBehaviour
 
     private List<PlayerUnit> containedUnits = new List<PlayerUnit>();
 
+    [SerializeField]
+    private SpriteRenderer frontSprite;
+    [SerializeField]
+    private SpriteRenderer backSprite;
+    [SerializeField]
+    private SpriteRenderer floorSprite;
+
+    [SerializeField]
+    private Sprite stoneFrontSprite;
+    [SerializeField]
+    private Sprite stoneBackSprite;
+    [SerializeField]
+    private Sprite stoneFloorSprite;
+
     public void AddUnit(PlayerUnit unit)
     {
         containedUnits.Add(unit);
@@ -30,5 +44,12 @@ public class Tower : MonoBehaviour
                 ObjectPlacer.Instance.GetToweredUnits().Remove(unit.gameObject);
             }
         }
+    }
+
+    public void UpgradeTower()
+    {
+        frontSprite.sprite = stoneFrontSprite;
+        backSprite.sprite = stoneBackSprite;
+        floorSprite.sprite = stoneFloorSprite;
     }
 }

@@ -495,3 +495,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallDistance: -1.5
+  frontSprite: {fileID: 4008225825002662432}
+  backSprite: {fileID: 4714358888389515657}
+  floorSprite: {fileID: 3829860400505379672}
+  stoneFrontSprite: {fileID: 21300000, guid: 6ed35b5bd7594e04998e773344dbb2fa, type: 3}
+  stoneBackSprite: {fileID: 21300000, guid: 17de10bfdbeb1de45baa6106096909ea, type: 3}
+  stoneFloorSprite: {fileID: 21300000, guid: 15b75a733866efd43b5bcd23fd965200, type: 3}

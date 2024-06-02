@@ -53,7 +53,14 @@ public class TowerPlaceable : MonoBehaviour, Placeable
     {
         GameObject newObj = Instantiate(towerPrefab, transform.position, Quaternion.identity);
         ObjectPlacer.Instance.GetPlayerAttackables().Add(newObj);
-        
+        if (UpgradeController.Instance.hasUpgradedTower())
+        {
+            Tower tower = newObj.GetComponent<Tower>();
+            if (tower != null)
+            {
+                tower.UpgradeTower();
+            }
+        }
 
     }
 
