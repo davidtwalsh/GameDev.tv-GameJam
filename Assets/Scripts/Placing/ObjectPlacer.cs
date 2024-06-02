@@ -40,6 +40,8 @@ public class ObjectPlacer : MonoBehaviour
 
     private bool canAfford = true;
 
+    private List<GameObject> fairies = new List<GameObject>();
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -218,5 +220,10 @@ public class ObjectPlacer : MonoBehaviour
             activePlacerGhost.SetActive(true);
             placingObject = true;
         }
+    }
+
+    public List<GameObject> GetFairies()
+    {
+        return fairies;
     }
 }

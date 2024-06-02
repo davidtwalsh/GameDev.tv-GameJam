@@ -136,6 +136,12 @@ public class Fairy : MonoBehaviour
         }
     }
 
+    public void SetUpgradedSpeed(float speedBoost)
+    {
+        moveSpeed += speedBoost;
+    }
+
+
     private enum FairyState
     {
         Wandering,

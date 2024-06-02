@@ -21,6 +21,9 @@ public class UnitPlaceable : MonoBehaviour, Placeable
     private bool isOverTower = false;
     private Tower tower;
 
+    [SerializeField]
+    private bool isInvulnerable = false;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -55,9 +58,13 @@ public class UnitPlaceable : MonoBehaviour, Placeable
     public void Place(Vector3 worldPosition)
     {
         GameObject newObj = Instantiate(unitPrefab, transform.position, Quaternion.identity);
-        if (isOverTower == false)
+        if (isOverTower == false && isInvulnerable == false)
         {
             ObjectPlacer.Instance.GetPlayerAttackables().Add(newObj);
+        }
+        else if (isInvulnerable == true)
+        {
+            ObjectPlacer.Instance.GetFairies().Add(newObj);
         }
 
         ArcherAttacker archer = newObj.GetComponent<ArcherAttacker>();
@@ -75,6 +82,13 @@ public class UnitPlaceable : MonoBehaviour, Placeable
         {
             UpgradeController.Instance.UpgradeCrossbowMan(crossbowMan);
         }
+
+        Fairy fairy = newObj.GetComponent<Fairy>();
+        if (fairy != null && UpgradeController.Instance.HasUpgradedFairy() == true) 
+        {
+            UpgradeController.Instance.UpgradeFairy(fairy);
+        }
+
 
         if (isOverTower == true)
         {

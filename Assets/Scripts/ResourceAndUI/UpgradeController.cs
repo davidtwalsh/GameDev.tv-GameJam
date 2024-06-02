@@ -17,6 +17,8 @@ public class UpgradeController : MonoBehaviour
     private int upgradeWizardCost;
     [SerializeField]
     private int upgradeCrossbowManCost;
+    [SerializeField]
+    private int upgradeFairyCost;
 
     [Header("Upgrade Improvements")]
     [SerializeField]
@@ -27,6 +29,8 @@ public class UpgradeController : MonoBehaviour
     private float upgradedWizardExtraPolymorphTime;
     [SerializeField]
     private int upgradedCrossbowManExtraAttack;
+    [SerializeField]
+    private float upgradedFairySpeedIncrease;
 
     [Header("Upgrade Sprites")]
     [SerializeField]
@@ -37,6 +41,8 @@ public class UpgradeController : MonoBehaviour
     private Sprite upgradedWizardSprite;
     [SerializeField]
     private Sprite upgradedCrossbowManSprite;
+    [SerializeField]
+    private Sprite upgradedFairySprite;
 
     [Header("UI")]
     [SerializeField]
@@ -67,10 +73,18 @@ public class UpgradeController : MonoBehaviour
     [SerializeField]
     private Image placeCrossbowManImage;
 
+    [SerializeField]
+    private TextMeshProUGUI upgradeFairyCostText;
+    [SerializeField]
+    private GameObject upgradeFairyButton;
+    [SerializeField]
+    private Image placeFairyImage;
+
     private bool upgradedArcher = false;
     private bool upgradedWall = false;
     private bool upgradedWizard = false;
     private bool upgradedCrossbowMan = false;
+    private bool upgradedFairy = false;
 
     [SerializeField]
     private float towerRangeBonus = 3f;
@@ -96,6 +110,7 @@ public class UpgradeController : MonoBehaviour
         upgradeWizardCostText.text = upgradeWizardCost.ToString();
         upgradeWallCostText.text = upgradeWallCost.ToString();
         upgradeCrossbowManCostText.text = upgradeCrossbowManCost.ToString();
+        upgradeFairyCostText.text = upgradeFairyCost.ToString();
     }
 
     public void UpgradeArchers()
@@ -146,6 +161,18 @@ public class UpgradeController : MonoBehaviour
         }
     }
 
+    public void UpgradeFairies()
+    {
+        if (ResourceController.Instance.CanSpendCoins(upgradeFairyCost) == true)
+        {
+            upgradedFairy = true;
+            ResourceController.Instance.SpendCoins(upgradeFairyCost);
+            UpdateAllCurrentFairies();
+            upgradeFairyButton.SetActive(false);
+            placeFairyImage.sprite = upgradedFairySprite;
+        }
+    }
+
     private void UpdateAllCurrentArchers()
     {
         List<GameObject> playerObjects = ObjectPlacer.Instance.GetPlayerAttackables();
@@ -163,6 +190,19 @@ public class UpgradeController : MonoBehaviour
             if (archer != null)
             {
                 UpgradeArcher(archer);
+            }
+        }
+    }
+
+    private void UpdateAllCurrentFairies()
+    {
+        List<GameObject> fairies = ObjectPlacer.Instance.GetFairies();
+        foreach (GameObject fairyObj in fairies)
+        {
+            Fairy fairy = fairyObj.GetComponent<Fairy>();
+            if (fairy != null)
+            {
+                UpgradeFairy(fairy);
             }
         }
     }
@@ -251,6 +291,16 @@ public class UpgradeController : MonoBehaviour
         }
     }
 
+    public void UpgradeFairy(Fairy fairy)
+    {
+        fairy.SetUpgradedSpeed(upgradedFairySpeedIncrease);
+        SpriteRenderer spr = fairy.GetComponent<SpriteRenderer>();
+        if (spr != null)
+        {
+            spr.sprite = upgradedFairySprite;
+        }
+    }
+
     public void UpgradeCrossbowMan(CrossbowAttacker crossbowMan)
     {
         crossbowMan.SetUpgradedAttackDamage(upgradedCrossbowManExtraAttack);
@@ -290,6 +340,11 @@ public class UpgradeController : MonoBehaviour
     public bool HasUpgradedCrossbowMan()
     {
         return upgradedCrossbowMan;
+    }
+
+    public bool HasUpgradedFairy()
+    {
+        return upgradedFairy;
     }
 
     public float GetTowerRangeBonus()
