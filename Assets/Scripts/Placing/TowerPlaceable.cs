@@ -18,9 +18,12 @@ public class TowerPlaceable : MonoBehaviour, Placeable
     [SerializeField]
     private TextMeshProUGUI costText;
 
+    AudioSource audioSource;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
     void Start()
     {
@@ -62,6 +65,7 @@ public class TowerPlaceable : MonoBehaviour, Placeable
             }
         }
 
+        audioSource.Play();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

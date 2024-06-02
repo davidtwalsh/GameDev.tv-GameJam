@@ -18,9 +18,12 @@ public class Fairy : MonoBehaviour
 
     private Coin seekingCoin;
 
+    private AudioSource audioSource;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -86,6 +89,7 @@ public class Fairy : MonoBehaviour
         ResourceController.Instance.AddCoin();
         ResourceController.Instance.GetGroundCoins().Remove(seekingCoin);
         Destroy(seekingCoin.gameObject);
+        audioSource.Play();
 
     }
 

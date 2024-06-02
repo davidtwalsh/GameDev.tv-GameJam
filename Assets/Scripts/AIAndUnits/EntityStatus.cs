@@ -126,6 +126,17 @@ public class EntityStatus : MonoBehaviour
                 GameObject remains = Instantiate(remainsPrefab, transform.position, Quaternion.identity);
                 remains.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
                 remains.GetComponent<SpriteRenderer>().sprite = spriteRenderer.sprite;
+                AudioSource audioSource = remains.GetComponent<AudioSource>();
+                Enemy enemy = GetComponent<Enemy>();
+                if (enemy != null && audioSource != null)
+                {
+                    audioSource.clip = enemy.GetDeathSound();
+                    ObjectRemains objectRemains = remains.GetComponent<ObjectRemains>();
+                    if  (objectRemains != null)
+                    {
+                        objectRemains.PlaySound();
+                    }
+                }
             }
 
             Destroy(gameObject);

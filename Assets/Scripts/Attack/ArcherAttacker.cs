@@ -21,6 +21,13 @@ public class ArcherAttacker : MonoBehaviour, IAttacker
     [SerializeField]
     private DamageAttack attack;
 
+    private AudioSource audioSource;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         if (isAttacking && target != null)
@@ -60,6 +67,7 @@ public class ArcherAttacker : MonoBehaviour, IAttacker
         arrow.transform.localScale = transform.localScale;
         Projectile projectile = arrow.GetComponent<Projectile>();
         projectile.Init(target,attack);
+        audioSource.Play();
     }
 
     private void RotateBow()

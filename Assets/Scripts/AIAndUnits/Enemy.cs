@@ -35,11 +35,17 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private int coinDropMax;
 
+    [SerializeField]
+    private AudioClip deathSound;
+
+    AudioSource audioSource;
+
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalSprite = spriteRenderer.sprite;
+        audioSource = GetComponent<AudioSource>();
     }
     private void Start()
     {
@@ -230,6 +236,11 @@ public class Enemy : MonoBehaviour
 
     public void SetPolymorphed()
     {
+        if (audioSource != null && state != EnemyState.Polymorphed)
+        {
+            audioSource.clip = SpriteController.Instance.sheepClip;
+            audioSource.Play();
+        }
         weaponAnimator.gameObject.SetActive(false);
         spriteRenderer.sprite = SpriteController.Instance.GetSheepSprite();
         SetState(EnemyState.Polymorphed);
@@ -259,6 +270,11 @@ public class Enemy : MonoBehaviour
                 ResourceController.Instance.GetGroundCoins().Add(coin);
             }
         }
+    }
+
+    public AudioClip GetDeathSound()
+    {
+        return deathSound;
     }
 }
 

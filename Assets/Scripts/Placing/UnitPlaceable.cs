@@ -24,9 +24,12 @@ public class UnitPlaceable : MonoBehaviour, Placeable
     [SerializeField]
     private bool isInvulnerable = false;
 
+    AudioSource audioSource;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
     void Start()
     {
@@ -57,6 +60,10 @@ public class UnitPlaceable : MonoBehaviour, Placeable
 
     public void Place(Vector3 worldPosition)
     {
+        if (audioSource != null && audioSource.clip != null)
+        {
+            audioSource.Play();
+        }
         GameObject newObj = Instantiate(unitPrefab, transform.position, Quaternion.identity);
         if (isOverTower == false && isInvulnerable == false)
         {
@@ -65,6 +72,7 @@ public class UnitPlaceable : MonoBehaviour, Placeable
         else if (isInvulnerable == true)
         {
             ObjectPlacer.Instance.GetFairies().Add(newObj);
+            
         }
 
         ArcherAttacker archer = newObj.GetComponent<ArcherAttacker>();

@@ -5,7 +5,11 @@ using UnityEngine;
 public class ObjectRemains : MonoBehaviour
 {
     private float activeTimer = 0f;
-
+    private AudioSource audioSource;
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     private void Update()
     {
         activeTimer += Time.deltaTime;
@@ -15,7 +19,10 @@ public class ObjectRemains : MonoBehaviour
         }
     }
 
-
+    public void PlaySound()
+    {
+        audioSource.Play();
+    }
 
 
 

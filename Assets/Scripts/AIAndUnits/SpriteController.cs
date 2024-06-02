@@ -9,6 +9,8 @@ public class SpriteController : MonoBehaviour
 
     public static SpriteController Instance;
 
+    public AudioClip sheepClip;
+
     void Awake()
     {
         if (Instance != null && Instance != this)

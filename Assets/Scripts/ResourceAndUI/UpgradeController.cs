@@ -104,6 +104,8 @@ public class UpgradeController : MonoBehaviour
     [SerializeField]
     private float upgradedTowerExtraRangeBonus = 3f;
 
+    private AudioSource audioSource;
+
 
     void Awake()
     {
@@ -117,6 +119,8 @@ public class UpgradeController : MonoBehaviour
             // Set this instance as the singleton instance if it's the first one
             Instance = this;
         }
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -138,6 +142,7 @@ public class UpgradeController : MonoBehaviour
             UpdateAllCurrentArchers();
             upgradeArcherButton.SetActive(false);
             placeArcherImage.sprite = upgradedArcherSprite;
+            audioSource.Play();
         }
     }
 
@@ -150,6 +155,7 @@ public class UpgradeController : MonoBehaviour
             UpdateAllCurrentWalls();
             upgradeWallButton.SetActive(false);
             placeWallImage.sprite = upgradedWallSprite;
+            audioSource.Play();
         }
     }
 
@@ -162,6 +168,7 @@ public class UpgradeController : MonoBehaviour
             UpdateAllCurrentTowers();
             upgradeTowerButton.SetActive(false);
             placeTowerImage.sprite = upgradedTowerSprite;
+            audioSource.Play();
         }
     }
 
@@ -174,6 +181,7 @@ public class UpgradeController : MonoBehaviour
             UpdateAllCurrentWizards();
             upgradeWizardButton.SetActive(false);
             placeWizardImage.sprite = upgradedWizardSprite;
+            audioSource.Play();
         }
     }
 
@@ -186,6 +194,7 @@ public class UpgradeController : MonoBehaviour
             UpdateAllCurrentCrossbowMen();
             upgradeCrossbowManButton.SetActive(false);
             placeCrossbowManImage.sprite = upgradedCrossbowManSprite;
+            audioSource.Play();
         }
     }
 
@@ -198,6 +207,7 @@ public class UpgradeController : MonoBehaviour
             UpdateAllCurrentFairies();
             upgradeFairyButton.SetActive(false);
             placeFairyImage.sprite = upgradedFairySprite;
+            audioSource.Play();
         }
     }
 

@@ -18,9 +18,11 @@ public class StructurePlaceable : MonoBehaviour, Placeable
     [SerializeField]
     TextMeshProUGUI costText;
 
+    AudioSource audioSource;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -79,6 +81,8 @@ public class StructurePlaceable : MonoBehaviour, Placeable
             wall.UpdateOtherSprites();
             MapMaker.Instance.walls.Add((xMapPosition, yMapPosition), wall);
         }
+
+        audioSource.Play();
     }
 
     public void MoveWithMouse(Vector3 worldPosition)

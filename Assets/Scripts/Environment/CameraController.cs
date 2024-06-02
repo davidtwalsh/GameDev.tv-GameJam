@@ -21,6 +21,12 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float yMax = 30f;
 
+
+    private void Awake()
+    {
+        AudioListener.volume = .2f;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

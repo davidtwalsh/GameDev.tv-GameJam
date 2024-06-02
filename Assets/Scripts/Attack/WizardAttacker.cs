@@ -24,6 +24,13 @@ public class WizardAttacker : MonoBehaviour, IAttacker
 
     private bool isDoneCasting = false;
 
+    AudioSource audioSource;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         if (isAttacking && target != null && isDoneCasting == false)
@@ -57,6 +64,7 @@ public class WizardAttacker : MonoBehaviour, IAttacker
 
     private void CastSpell()
     {
+        audioSource.Play();
         GameObject spell = Instantiate(spellPrefab);
         spell.transform.position = wand.transform.position;
         spell.transform.rotation = wand.transform.rotation;
